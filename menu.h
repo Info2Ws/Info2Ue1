@@ -1,0 +1,24 @@
+#ifndef _MENU_H_
+#define _MENU_H_
+
+/******************************************************
+* FUNKTION: getMenu
+*-----------------------------------------------------
+* BESCHREIBUNG: Ausgabe des Menütitels, der Menüpunkte
+*				und Abfrage der Menüpunktauswahl
+* PARAMETER: Menütitel (char), Menüpunkte (char),
+*			 Anzahl der Menüpunkte (int), 
+*			 Sichtbarkeit des Menütitels (int)
+* ERGEBNISTYP: int
+* ERGEBNISWERTE:
+*   -> NORMALFALL: 1-7 
+*   -> FEHLERFALL: -
+*-----------------------------------------------------
+* ERSTELLT VON: P. Simons
+*           AM: 20.10.2014
+* ÄNDERUNGEN  :
+******************************************************/
+
+int getMenu(char [], char *[], int, int);
+
+#endif
