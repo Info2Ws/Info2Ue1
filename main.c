@@ -7,7 +7,7 @@
 *-----------------------------------------------------
 * ERSTELLT VON: 
 *           AM: 19.10.2014
-* ÄNDERUNGEN  : 
+* ÄNDERUNGEN  : 28.10.2014
 ******************************************************/
 
 #include <stdio.h>
@@ -41,8 +41,6 @@ int main()
                 case 6: listMedia();	break;
                 case 7: exit = 0;		break;
         }
-
-        printf("\n\n");
         waitForEnter();
     }while(exit);
 

@@ -16,7 +16,7 @@
 *-----------------------------------------------------
 * ERSTELLT VON: 
 *           AM: 20.10.2014
-* ÄNDERUNGEN  :
+* ÄNDERUNGEN  : 28.10.2014
 ******************************************************/
 
 int getMenu(char menutitle[], char *menu[], int anz, int visibility);

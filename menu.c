@@ -22,12 +22,12 @@ int getMenu(char *menutitle, char *menu[], int anz, int visibility)
 		/*Ausgabe der Menüpunkte*/
 		for(i = 0; i < anz; i++)
 		{
-			printf("%i. %s\n", i+1, menu[i]); //
+			printf("%s\n", menu[i]); //
 		}
 
         /*Eingabeaufforderung*/
         printf("\nIhre Wahl: ");
-        scanf("%i",&choice);
+        scanf("%i", &choice);
         clearBuffer();
 
         /*Fehlermeldung für falsche Eingabe*/
