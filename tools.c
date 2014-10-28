@@ -33,7 +33,7 @@ void clearBuffer()
 void waitForEnter()
 {
     printf("\n\nPlease press ENTER to proceed...");
-    clearBuffer();            //maybe wrong that way...
+    clearBuffer();            //maybe wrong that way... <- it's ok that way
 }
 
 /**********************************************************

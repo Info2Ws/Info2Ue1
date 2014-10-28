@@ -6,7 +6,7 @@
 /** Funktions-Prototypen **/
 void clearBuffer();
 void waitForEnter();
-void clearBuffer();
+void clearScreen();
 void printLine(char c, int n);
 
 
