@@ -14,11 +14,11 @@
 *   -> NORMALFALL: 1-7 
 *   -> FEHLERFALL: -
 *-----------------------------------------------------
-* ERSTELLT VON: P. Simons
+* ERSTELLT VON: 
 *           AM: 20.10.2014
 * ÄNDERUNGEN  :
 ******************************************************/
 
-int getMenu(char [], char *[], int, int);
+int getMenu(char menutitle[], char *menu[], int anz, int visibility);
 
 #endif

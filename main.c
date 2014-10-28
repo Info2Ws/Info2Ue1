@@ -5,7 +5,7 @@
 *				Funktion des ausgewählten Menüpunktes 
 *				auf.
 *-----------------------------------------------------
-* ERSTELLT VON: P. Simons
+* ERSTELLT VON: 
 *           AM: 19.10.2014
 * ÄNDERUNGEN  : 
 ******************************************************/
@@ -29,7 +29,7 @@ int main()
 
     do
 	{
-        choice = getMenu(menutitle, menu, 7); //Aufruf des Menüs
+        choice = getMenu(menutitle, menu, 7, 1); //Aufruf des Menüs
 
         switch(choice) //Ausgabe des Menüpunktes
         {
