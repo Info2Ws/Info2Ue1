@@ -19,7 +19,7 @@
 
 int main()
 {
-    char * menutitle = "Medien-Verwaltung Deluxe";
+    char * menutitle = "Medien-Verwaltung Deluxe";      //wir brauchen einen besseren namen..
     char * menu[7] = {"1. Neues Medium anlegen", "2. Medium bearbeiten", 
 	"3. Medium loeschen", "4. nach Tracks suchen", "5. Tracks sortieren", 
 	"6. Medien auflisten", "7. Programm beenden"};

@@ -13,7 +13,7 @@ int getMenu(char *menutitle, char *menu[], int anz, int visibility)
 		/*Ausgabe des Menütitels*/
 		if(visibility)
 		{
-			system("clear");
+			clearScreen();      //system("clear");
 			printf("%s\n", menutitle);
 			printLine('=',24);
 			printf("\n\n");
