@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include "media.h"
 
-extern int Mediacounter=0;
-extern TMedia Media=[20];
+int Mediacounter=0;
+TMedia Media[20];
 
 
 /**********************************************************
