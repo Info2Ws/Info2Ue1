@@ -32,7 +32,7 @@ typedef struct
 	struct TMediatype *Type;
 	unsigned int Releasedate;
 	unsigned int Totalnumber;
-	//enum=[MAXTRACKS];    schon oben definiert, gibt sonst fehler beim compilen
+	enum={MAXTRACKS};    //schon oben definiert, gibt sonst fehler beim compilen
 	
 }TMedias;
 	
