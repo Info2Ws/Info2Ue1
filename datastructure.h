@@ -22,13 +22,13 @@ typedef struct
 	int Tracknr;
 	char *title;//pointer auf titel
 	char *interpret;//pointer auf interpret
-	TTime_t  *lp;//lengthpointer
+	TTime  *lp;//lengthpointer
 }TTrack; 
 	
 typedef struct
 {
-	TTracks_t *title;
-	TTracks_t *interpret;
+	TTracks *title;
+	TTracks *interpret;
 	struct TMediatype *Type;
 	unsigned int Releasedate;
 	unsigned int Totalnumber;
