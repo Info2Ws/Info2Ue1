@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include "media.h"
 
+extern int Mediacounter=0;
+extern TMedia Media=[0];
+
+
 /**********************************************************
  * FUNCTION:        createMedia 
  * --------------------------------------------------------
