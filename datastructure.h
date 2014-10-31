@@ -4,28 +4,28 @@
 
 #define MAXTRACKS  20
 
-typedef struct TTime
+typedef struct
 {
 	int hour;
 	int minute;
 	int second;
-} TTime_t; //neuer Typ TTime_t
+} TTime; //neuer Typ TTime_t
 
 
-typedef struct Tmediatype  
+typedef struct  
 { enum{ CD, DVD, Blueray, Sonstiges
 	} mediatype;
-}TMediatype_;
+}TMediatype;
 
-typedef struct TTracks
+typedef struct
 { 
 	int Tracknr;
 	char *title;//pointer auf titel
 	char *interpret;//pointer auf interpret
 	TTime_t  *lp;//lengthpointer
-}TTracks_t; 
+}TTrack; 
 	
-typedef struct TMedias
+typedef struct
 {
 	TTracks_t *title;
 	TTracks_t *interpret;
@@ -34,5 +34,5 @@ typedef struct TMedias
 	unsigned int Totalnumber;
 	//enum=[MAXTRACKS];    schon oben definiert, gibt sonst fehler beim compilen
 	
-}TMedias_t;
+}TMedias;
 	
