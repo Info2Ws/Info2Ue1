@@ -3,7 +3,7 @@
 #include "media.h"
 
 extern int Mediacounter=0;
-extern TMedia Media=[0];
+extern TMedia Media=[20];
 
 
 /**********************************************************
