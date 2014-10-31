@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "media.h"
+#include "datastructure.h"
 
-int Mediacounter=0;
-TMedia Media[20];
+int Mediacounter;
+TMedia Medias;
 
 
 /**********************************************************

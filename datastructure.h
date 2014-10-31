@@ -27,12 +27,15 @@ typedef struct
 	
 typedef struct
 {
-	TTracks *title;
-	TTracks *interpret;
+	TTrack *title;
+	TTrack *interpret;
 	struct TMediatype *Type;
 	unsigned int Releasedate;
 	unsigned int Totalnumber;
-	enum={MAXTRACKS};    //schon oben definiert, gibt sonst fehler beim compilen
+	//enum {MAXTRACKS};    //schon oben definiert, gibt sonst fehler beim compilen
+    TTrack Tracks[MAXTRACKS];
 	
-}TMedias;
+}TMedia;
 	
+//extern TTime;
+//extern TMedia Medias;
