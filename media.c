@@ -4,7 +4,7 @@
 #include "datastructure.h"
 
 int Mediacounter;
-TMedia Medias;
+TMedia Medias[MAXMEDIA];
 
 
 /**********************************************************
