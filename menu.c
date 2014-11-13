@@ -33,7 +33,7 @@ int getMenu(char *menutitle, char *menu[], int anz, int visibility)
         /*Fehlermeldung für falsche Eingabe*/
         if((choice > anz) || (1 > choice))
         {
-			printf("Geben Sie eine Zahl zwischen 1 und 7 ein!");
+			printf("Geben Sie eine Zahl zwischen 1 und %i ein!", anz);
 			waitForEnter();
 		}
 
