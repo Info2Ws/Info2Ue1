@@ -15,7 +15,7 @@
      
     void getTime(char *Text, TTime *Zeit)
     {
-    char strtime[9];
+    char strTime[9];
     int checkZeit = 0;
     int checkZeit2 = 0;
     int l=0;
@@ -24,14 +24,14 @@
     {
         printf("Bitte geben sie die Laenge des Titels im Format HH:MM:SS ein:\n");
      
-        Zeit->hour = NULL;
-        Zeit->minute = NULL;
-        Zeit->second = NULL;
+        //Zeit->hour = NULL;
+       // Zeit->minute = NULL;
+       // Zeit->second = NULL;
      
         scanf("%9s", &strTime);
         clearBuffer();
      
-       	l = splitstring(strTime ':',&arr)
+       	l = splitstring(strTime, ':',&arr);
         checkZeit2 = checkTime(Zeit, 1, strTime);
         
         convertString(strTime, Zeit);
@@ -59,17 +59,17 @@
     }
      
      
-    void splitstring (TTime *Zeit, char c, char ***arr) //zerlegt den string anhand von Doppelpunkten
+    void splittring (TTime *Zeit, char c, char ***arr) //zerlegt den string anhand von Doppelpunkten
     {
         int count = 1; //anzahl der Doppelpunkte
         int token_len = 1; //Länge des betrachteten Tokens
-        int i,j,k = 0;
+        int i = 0;
         char *pos; //cursorposition als pointer
         char *t;   //position des tokens
-        char c = ':'; //Trennzeichen
-        char **arr[3];
+        c = ':'; //Trennzeichen
+        char ***arr[3];
      
-        pos = lp;
+        pos = &strtime[];
      
         {
             while (*pos != '\0') //zählt die Trennzeichen bis zum Ende des Strings
