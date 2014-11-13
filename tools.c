@@ -130,7 +130,7 @@ int getText(char *prompt, int plength, int allowempty, char **input)
         do
         {
             //Eingabeaufforderung ausgeben
-            printf("%s, (max. %i Zeichen)", prompt, plength);
+            printf("\n%s, (max. %i Zeichen): ", prompt, plength);
             //Einlesen des Aufgeforderten
             scanreturn = scanf(format, tempinput);
             clearBuffer();
@@ -168,4 +168,37 @@ int getText(char *prompt, int plength, int allowempty, char **input)
     }
     return 0;
 }
+
+/**********************************************************
+ * FUNCTION:        getNumber
+ * --------------------------------------------------------
+ * DESCRIPTION:     prompts a number
+ * PARAMETER:       name of prompt (char *)
+ *                  string to store (char **)
+ *                  from (int)
+ *                  to (int)
+ * RESULT:          int
+ * STATUS:          WIP 
+ **********************************************************/
+int getNumber(char *prompt, int **input, int from, int to)
+{
+    //Variablen
+    int scanreturn = NULL;
+    do
+    {
+        //Eingabeaufforderung und Einlesen
+        printf("\n%s (von %i bis %i): ", prompt, from, to);
+        scanreturn = scanf("%i", input);
+        clearBuffer();
+        
+        //Test gegen unzulässige Eingaben
+        if((scanreturn == NULL) || (*input < from) || (*input > to))
+        {
+            printf("Bitte korrekten Wert innerhalb der Grenzen eingeben!");
+        }
+    }while((scanreturn == NULL) || (*input < from) || (*input > to));
+
+    return 1;
+}
+
 
