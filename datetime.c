@@ -7,18 +7,11 @@
     #include<string.h>
     #include"tools.h"
      
-   // void printTime(TTime *Zeit);
-  //  void getTime(char *Text, TTime *Zeit);
-   // void splitstring (TTime *Zeit, char c, char ***arr);
-  //  int checkTime (TTime *Zeit , int legit, char *strTime);
-     
-     
     void getTime(char *Text, TTime *Zeit)
     {
     char strTime[9];
     int checkZeit = 0;
     int checkZeit2 = 0;
-    int l=0;
     char **arr=NULL;
     do
     {
@@ -27,15 +20,13 @@
         //Zeit->hour = NULL;
        // Zeit->minute = NULL;
        // Zeit->second = NULL;
-     
-        scanf("%9s", &strTime);
+        fflush(stdin);
+        scanf(" %9c", &strTime);
         clearBuffer();
      
        	l = splitstring(strTime, ':',&arr);
         checkZeit2 = checkTime(Zeit, 1, strTime);
-        
-        convertString(strTime, Zeit);
-     
+       
         if(!checkZeit2)
         {
             printf("Falsche Eingabe! Format (hh:mm:ss oder mm:ss)\n Fortfahren mit Enter");
@@ -68,8 +59,8 @@
         char *t;   //position des tokens
         c = ':'; //Trennzeichen
         char ***arr[3];
-     
-        pos = &strtime[];
+        
+        pos = str;
      
         {
             while (*pos != '\0') //zählt die Trennzeichen bis zum Ende des Strings
