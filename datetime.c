@@ -7,10 +7,10 @@
     #include<string.h>
     #include"tools.h"
      
-    void printTime(TTime *Zeit);
-    void getTime(char *Text, TTime *Zeit);
-    void splitstring (TTime *Zeit, char c, char ***arr);
-    int checkTime (TTime *Zeit , int legit, char *strTime);
+   // void printTime(TTime *Zeit);
+  //  void getTime(char *Text, TTime *Zeit);
+   // void splitstring (TTime *Zeit, char c, char ***arr);
+  //  int checkTime (TTime *Zeit , int legit, char *strTime);
      
      
     void getTime(char *Text, TTime *Zeit)
