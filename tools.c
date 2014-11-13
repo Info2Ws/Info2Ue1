@@ -1,11 +1,18 @@
+#include <stdlib.h>
 #include "tools.h"
-#include "stdlib.h"
 
 /**********************************************************
  **********************************************************
  * MODULE: tools
  * --------------------------------------------------------
  * DESCRIPTION: auxillary functions
+ * FUNCTIONS:
+ *              clearBuffer
+ *              waitForEnter
+ *              clearScreen
+ *              printLine
+ *              askAgain
+ *              getText
  **********************************************************
  **********************************************************/
 
@@ -32,7 +39,7 @@ void clearBuffer()
  **********************************************************/
 void waitForEnter()
 {
-    printf("\n\nPlease press ENTER to proceed...");
+    printf("\n\nBitte ENTER drücken um fortzufahren...");
     clearBuffer();            //maybe wrong that way... <- it's ok that way
 }
 
@@ -50,7 +57,7 @@ void clearScreen()
  * FUNCTION:        printLine
  * --------------------------------------------------------
  * DESCRIPTION:     gets a char and an int number and 
- *                  prints a line with number * chars
+ *                  prints a line with number amount of chars
  **********************************************************/
 void printLine(char c, int n)
 {
@@ -60,3 +67,105 @@ void printLine(char c, int n)
         printf("%c", c);       //should it produce an '\n' at the end??
     }
 }
+
+/**********************************************************
+ * FUNCTION:        askAgain
+ * --------------------------------------------------------
+ * DESCRIPTION:     asks, if the user wants to enter
+ *                  another track
+ * STATUS:          WIP 
+ **********************************************************/
+int askAgain()
+{
+    char choice;
+    printf("\nWeiteren Track eingeben? (J/n): ");
+    scanf("%c", &choice);
+    clearBuffer();
+    while(1)
+    {
+        if(choice == 'J' || choice == 'j'|| choice == '\n')
+        {
+            return 1;
+        }
+        if(choice == 'N' || choice == 'n')
+        {   
+            return 0;
+        }
+        else
+        {
+            printf("\nBitte Frage mit Ja (j) oder Nein (n) beantworten.\nDer Großbuchstabe zeigt die Standartwahl an.\n");
+            continue;
+        }
+    }
+}
+
+/**********************************************************
+ * FUNCTION:        getText
+ * --------------------------------------------------------
+ * DESCRIPTION:     allocates memory for entered strings
+ * PARAMETER:       name of prompt (char *)
+ *                  max. length (int)
+ *                  emtpy string allowed (int) (0 = false)
+ *                  string to store (char **)
+ * RESULT:          int
+ * STATUS:          WIP 
+ **********************************************************/
+int getText(char *prompt, int plength, int allowempty, char **input)
+{
+    //Variablen
+    *input = NULL;
+    char *tempinput;
+    int templength;
+    char format[20];
+    int scanreturn;
+
+    //Speicherzuweisung der temp. Lesevariable
+    tempinput = calloc(plength+1, sizeof(char));
+
+    if(tempinput)
+    {
+        //Drucken des Format-Strings für scanf
+        sprintf(format, "%%%i[^\n]", plength);
+
+        do
+        {
+            //Eingabeaufforderung ausgeben
+            printf("%s, (max. %i Zeichen)", prompt, plength);
+            //Einlesen des Aufgeforderten
+            scanreturn = scanf(format, tempinput);
+            clearBuffer();
+            if(scanreturn == 1)
+            {
+                templength = strlen(tempinput);
+                if(templength > 1)
+                {
+                    *input = calloc(templength+1, sizeof(char));
+                    if(*input)
+                    {
+                        strcpy(*input, tempinput);
+                        free(tempinput);
+                        return 1;
+                    }
+                    else
+                    {
+                        fprintf(stderr, "FEHLER! ZU WENIG SPEICHER");
+                        return 0;
+                    }
+                    
+                }
+            }
+            if((scanreturn == 0) && (allowempty == 1))
+            {
+                free(tempinput);
+                return 1;
+            }
+            else
+            {
+                printf("\nDas Feld dar nicht leer bleiben!\n");
+            }
+                
+        }while(scanreturn == 0);
+    }
+    return 0;
+}
+
