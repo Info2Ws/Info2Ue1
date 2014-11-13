@@ -94,7 +94,7 @@
                 i = 0;
                 pos = str;
                 t = ((*arr)[i]);
-                <<<
+              
                 while (*pos != '\0')  //kopieren der Token in arr[i] bis zum nächsten Trennzeichen
                 {
                     if (*pos != c && *p != '\0') //falls pointer noch kein Trennzeichen erreicht hat und der String nicht beendet ist
