@@ -31,8 +31,7 @@ typedef struct
 	TMediatype *Type;
 	unsigned int Releasedate;
 	unsigned int Totalnumber;
-    TTrack Tracks[MAXTRACKS];
-	
+    	TTrack Tracks[MAXTRACKS];
 }TMedia;
 	
 extern int MediaCounter;
