@@ -1,5 +1,5 @@
-#ifndef MEDIA_H_
-#define MEDIA_H_
+#ifndef _MEDIA_H_
+#define _MEDIA_H_
 
 void createMedia();
 void editMedia();

@@ -2,7 +2,7 @@
 #define _TOOLS_
 #include <stdio.h>
 #include <stdlib.h>
-include <media.h>
+#include "media.h"
 #include <string.h>
 
 /** Funktions-Prototypen **/
