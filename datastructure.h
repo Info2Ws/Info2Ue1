@@ -1,5 +1,5 @@
-#ifndef DATASTRUCTURE_H_
-#define DATASTRUCTURE_H_
+#ifndef _DATASTRUCTURE_H_
+#define _DATASTRUCTURE_H_
 
 #define MAXTRACKS  20
 #define MAXMEDIA 20
