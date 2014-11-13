@@ -26,7 +26,7 @@
         Zeit->minute = NULL;
         Zeit->second = NULL;
      
-        scanf("%9s", strTime);
+        scanf("%9s", &strTime);
         clearBuffer();
      
      
