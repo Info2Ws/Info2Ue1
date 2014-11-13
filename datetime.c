@@ -7,10 +7,10 @@
     #include<string.h>
     #include"tools.h"
      
-    void printTime(TTime * Zeit);
+    void printTime(TTime *Zeit);
     void getTime(char *Text, TTime *Zeit);
     void splitstring (TTime *Zeit, char c, char ***arr);
-    int checkTime (TTime * Zeit , int legit, char *strTime);
+    int checkTime (TTime *Zeit , int legit, char *strTime);
      
      
     void getTime(char *Text, TTime *Zeit)
@@ -18,6 +18,8 @@
     char strtime[9];
     int checkZeit = 0;
     int checkZeit2 = 0;
+    int l=0;
+    char **arr=NULL;
     do
     {
         printf("Bitte geben sie die Laenge des Titels im Format HH:MM:SS ein:\n");
@@ -29,9 +31,9 @@
         scanf("%9s", &strTime);
         clearBuffer();
      
-     
+       	l = splitstring(strTime ':',&arr)
         checkZeit2 = checkTime(Zeit, 1, strTime);
-     
+        
         convertString(strTime, Zeit);
      
         if(!checkZeit2)
