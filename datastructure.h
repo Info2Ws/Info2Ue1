@@ -1,6 +1,5 @@
-#include <stdlib.h>
-
-
+#ifndef DATASTRUCTURE_H_
+#define DATASTRUCTURE_H_
 
 #define MAXTRACKS  20
 #define MAXMEDIA 20
@@ -19,7 +18,7 @@ typedef enum
 
 typedef struct
 { 
-	int Tracknr;
+	unsigned int Tracknr;
 	char *title;//pointer auf titel
 	char *interpret;//pointer auf interpret
 	TTime  *lp;//lengthpointer
@@ -27,15 +26,16 @@ typedef struct
 	
 typedef struct
 {
-	TTrack *title;
-	TTrack *interpret;
+	char *title;
+	char *interpret;
 	TMediatype *Type;
 	unsigned int Releasedate;
 	unsigned int Totalnumber;
-	//enum {MAXTRACKS};    //schon oben definiert, gibt sonst fehler beim compilen
     TTrack Tracks[MAXTRACKS];
 	
 }TMedia;
 	
 extern int MediaCounter;
 extern TMedia Medias[];
+
+#endif
