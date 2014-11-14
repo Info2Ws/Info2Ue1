@@ -160,12 +160,11 @@
                 return 1;
             }
         }
-     
-        
+    } 
+    }    
      
      
         void printTime(TTime * Zeit)
         {
             printf("%02i:%02i:%02i", Zeit->hour, Zeit->minute, Zeit->second);
         }
-
