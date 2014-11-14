@@ -15,7 +15,7 @@
     {
         printf("Bitte geben sie die Laenge des Titels im Format HH:MM:SS ein:\n");
         fflush(stdin);
-        scanf(" %9c", &strTime);
+        scanf(" %8c", &strTime);
         clearBuffer();
      
        	splitstring(strTime, ':',&arr);
