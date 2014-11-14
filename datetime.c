@@ -61,6 +61,7 @@
             while (*pos != '\0') //zählt die Trennzeichen bis zum Ende des Strings
             {
                 if (*pos == c)
+                
                     count++;
                 pos++;
             }
@@ -161,7 +162,7 @@
             }
         }
     } 
-    }    
+        
      
      
         void printTime(TTime * Zeit)
