@@ -159,9 +159,9 @@
      
                 return 1;
             }
-     
-     
         }
+     
+        
      
      
         void printTime(TTime * Zeit)
