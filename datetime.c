@@ -116,7 +116,7 @@
                     strsecond = arr[2];
                 }
                 if(strhour)
-                     atoi(strhour) = Zeit->hour;
+                    Zeit->hour = atoi(strhour) ;
                 if(strminute)
                 {
                     Zeit->minute = atoi(strminute);
