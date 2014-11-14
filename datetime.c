@@ -145,7 +145,7 @@
             if(legit == 1)
             {
      
-                while(*(strTime + k)
+                while(*(strTime + k))
             {
                 if(((*(strTime + k) < '0') || (*(strTime + k) > '9' )) && (*(strTime + k) != ':'))
                     {
