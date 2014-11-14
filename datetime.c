@@ -44,7 +44,7 @@
     }
      
      
-    void splitstring (TTime *Zeit, char c, char ***arr) //zerlegt den string anhand von Doppelpunkten
+    void splitstring (TTime *Zeit, char c, char **arr) //zerlegt den string anhand von Doppelpunkten
     {
         int count = 1; //anzahl der Doppelpunkte
         int token_len = 1; //Länge des betrachteten Tokens
@@ -52,7 +52,8 @@
         char *pos; //cursorposition als pointer
         char *t;   //position des tokens
         c = ':'; //Trennzeichen
-        char ***arr[3];
+        char **arr;
+        char strTime[9];
         
         pos = strTime;
      
@@ -67,13 +68,13 @@
             {
                 *arr = (char**) malloc(sizeof(char*) * count);  //dynamische speicherreservierung für Die  Segmente (zählen der Doppelpunkte)
                 if (*arr == NULL)
-                    exit 1;
+                    return 1;
                 {
                     if (*pos == c)
                     {
                         (*arr)[i] = (char*) malloc( sizeof(char) * token_len );  //ermittlung der Tokenlängen
                         if ((*arr)[i] == NULL)
-                            exit 1;
+                            return 1;
      
                         token_len = 0;
                         i++;
@@ -83,10 +84,10 @@
                 }
                 (*arr)[i] = (char*) malloc( sizeof(char) * token_len );
                 if ((*arr)[i] == NULL)
-                    exit 1;
+                    return 1;
      
                 i = 0;
-                pos = str;
+               //pos = strTime[0];
                 t = ((*arr)[i]);
               
                 while (*pos != '\0')  //kopieren der Token in arr[i] bis zum nächsten Trennzeichen
