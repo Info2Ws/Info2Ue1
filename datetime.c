@@ -66,13 +66,12 @@
             }
             if(count < 3)
             {
-                *arr = (char**) malloc(sizeof(char*) * count);  //dynamische speicherreservierung für Die  Segmente (zählen der Doppelpunkte)
+                arr = (char**) malloc(sizeof(char*) * count);  //dynamische speicherreservierung für Die  Segmente (zählen der Doppelpunkte)
                 if (*arr == NULL)
                     return 1;
-                {
                     if (*pos == c)
                     {
-                        (*arr)[i] = (char*) malloc( sizeof(char) * token_len );  //ermittlung der Tokenlängen
+                        (arr)[i] = (char*) malloc( sizeof(char) * token_len );  //ermittlung der Tokenlängen
                         if ((*arr)[i] == NULL)
                             return 1;
      
@@ -81,8 +80,7 @@
                     }
                     pos++;
                     token_len++;
-                }
-                (*arr)[i] = (char*) malloc( sizeof(char) * token_len );
+                (arr)[i] = (char*) malloc( sizeof(char) * token_len );
                 if ((*arr)[i] == NULL)
                     return 1;
      
@@ -108,21 +106,22 @@
                 if(count == 1)
                 {
                     strhour   = NULL;
-                    strminute = *arr[0];
-                    strsecond = *arr[1];
+                    strminute = arr[0];
+                    strsecond = arr[1];
                 }
                 else
                 {
-                    strhour = *arr[0]:
-                    strminute = *arr[1];
-                    strsecond = *arr[2];
+                    strhour = arr[0]:
+                    strminute = arr[1];
+                    strsecond = arr[2];
                 }
                 if(strhour)
                     Zeit->hour = atoi(strhour);
                 if(strminute)
-                    Zeit->minute = atoi(strminute)
-                    Zeit->second = atoi(strseconds)
-     
+                {
+                    Zeit->minute = atoi(strminute);
+                    Zeit->second = atoi(strseconds);
+                }
      
                 }
         }
