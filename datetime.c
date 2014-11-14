@@ -120,7 +120,7 @@
                 if(strminute)
                 {
                     Zeit->minute = atoi(strminute);
-                    Zeit->second = atoi(strseconds);
+                    Zeit->second = atoi(strsecond);
                 }
      
                 }
