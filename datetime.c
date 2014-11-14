@@ -53,6 +53,7 @@
         char *t;   //position des tokens
         c = ':'; //Trennzeichen
         char strTime[9];
+        int strhour, strminute,strsecond = 0;
         
         pos = strTime[0];
      
@@ -91,7 +92,7 @@
                 {
                     if (*pos != c && *pos != '\0') //falls pointer noch kein Trennzeichen erreicht hat und der String nicht beendet ist
                     {
-                        *t = *pos
+                        *t = *pos;
                              t++;
                     }
                     else
