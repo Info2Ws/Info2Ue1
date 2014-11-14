@@ -54,7 +54,7 @@
         c = ':'; //Trennzeichen
         char ***arr[3];
         
-        pos = str;
+        pos = strTime;
      
         {
             while (*pos != '\0') //zählt die Trennzeichen bis zum Ende des Strings
