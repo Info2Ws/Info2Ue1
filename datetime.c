@@ -101,7 +101,7 @@
                         i++;
                         t = ((*arr)[i]);
                     }
-                    p++;
+                    pos++;
                 }
                 if(count == 1)
                 {
@@ -111,7 +111,7 @@
                 }
                 else
                 {
-                    strhour = arr[0]:
+                    strhour = arr[0];
                     strminute = arr[1];
                     strsecond = arr[2];
                 }
