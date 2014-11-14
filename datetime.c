@@ -52,7 +52,6 @@
         char *pos; //cursorposition als pointer
         char *t;   //position des tokens
         c = ':'; //Trennzeichen
-        char **arr;
         char strTime[9];
         
         pos = strTime[0];
