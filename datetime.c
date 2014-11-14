@@ -1,5 +1,3 @@
-	
-
     #include"time.h"
     #include"datastructure.h"
     #include<stdlib.h>
@@ -16,15 +14,11 @@
     do
     {
         printf("Bitte geben sie die Laenge des Titels im Format HH:MM:SS ein:\n");
-     
-        //Zeit->hour = NULL;
-       // Zeit->minute = NULL;
-       // Zeit->second = NULL;
         fflush(stdin);
         scanf(" %9c", &strTime);
         clearBuffer();
      
-       	l = splitstring(strTime, ':',&arr);
+       	splitstring(strTime, ':',&arr);
         checkZeit2 = checkTime(Zeit, 1, strTime);
        
         if(!checkZeit2)
@@ -50,7 +44,7 @@
     }
      
      
-    void splittring (TTime *Zeit, char c, char ***arr) //zerlegt den string anhand von Doppelpunkten
+    void splitstring (TTime *Zeit, char c, char ***arr) //zerlegt den string anhand von Doppelpunkten
     {
         int count = 1; //anzahl der Doppelpunkte
         int token_len = 1; //Länge des betrachteten Tokens
