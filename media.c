@@ -17,23 +17,38 @@ TMedia Medias[MAXMEDIA];
  *********************************************************/
 void createMedia()
 {
+	TMedia * M = Medias + MediaCounter;
+
 	//Menütitel
     printf("Erfassung eines neuen Mediums\n");
     printLine('-' , 29);
     printf("\n\n");
 
     //Eingaben
-	
-    getText("Geben Sie bitte den Titel ein: ", 50 , 0 , &(Medias[MediaCounter].title));
+    getText("Geben Sie bitte den Titel ein: ", 50 , 0 , &(M->title));
     getText("Geben Sie bitte den Interpreten ein\n(Bei mehreren Interpreten Feld leer lassen):", 
-		50 , 1 , &(Medias[MediaCounter].interpret));
-	getText("Geben Sie bitte den Typ ein: ", 50 , 0 , &(Medias[MediaCounter].Type));
-    getNumber("Geben Sie bitte das Erscheinungsjahr ein: ", &(Medias[MediaCounter].Releasedate), 1950 , 2099);
-    Medias[MediaCounter].Totalnumber = 0;
+	50 , 1 , &(M->interpret));
+    //getText("Geben Sie bitte den Typ ein: ", 50 , 0 , &(M->Type));
+    getNumber("Geben Sie bitte das Erscheinungsjahr ein: ", &(M->Releasedate), 1950 , 2099);
+    M->Totalnumber = 0;
 
 	
     //Erstellung der einzelnen Tracks
-    createTrack(&(Medias[MediaCounter]));
+	printf("Geben Sie bitte die Daten der einzelnen Tracks ein:\n\n");    
+	do
+	{
+		if(createTrack(M->Tracks + M->Totalnumber, (M->interpret == NULL))){
+			(M->Totalnumber)++;
+			((M->Tracks + M->Totalnumber)->Tracknr) = M->Totalnumber;
+		}
+		else
+		{
+			break;
+		}
+    }while((askAgain()) && (M->Totalnumber < MAXTRACKS));
+
+	//Naechstes Medium
+	MediaCounter++;
 }
 /**********************************************************
  * FUNCTION:        editMedia 
@@ -60,45 +75,19 @@ void deleteMedia()
  * 				track length)
  *********************************************************/
  
- void createTrack(TMedia *pMedia)
+int createTrack(TTrack *pT, int wI)
 {
-    unsigned int i = 0; //Laufvariable
-	int repeat = 0; //Rueckgabewert der Funktion askAgain
-	TTrack * pTrack = 0;
-	unsigned int * pTotalnumber = 0;
-	char * pInterpret = 0;
-	unsigned int * pTracknr = 0;
-	
-	pTotalnumber = &(pMedia->Totalnumber);
-	pInterpret = &(pMedia->interpret);
-	
-    printf("Geben Sie bitte die Daten der einzelnen Tracks ein:\n\n");
-
-    // Abfrage der Trackinformationen
-    do
-    {
-		pTrack = &(pMedia->Tracks[pMedia->i]);
-		pTracknr = &(pTrack->Tracknr);
-		
-		printf("Track %i\n\n\n", (i + 1));
-        *pTracknr = i + 1; //aktuelle Tracknr zuweisen
-		getText("Geben Sie bitte den Titel des Tracks an: ", 50 , 0 ,&pTrack->title);
-        if(*pInterpret == '\n') //Falls Medium-Interpret leer -> Einzelne Interpreten abfragen
+	// Abfrage der Trackinformationen	
+	printf("Track %i\n\n\n", pT->Tracknr + 1);
+    
+	getText("Geben Sie bitte den Titel des Tracks an: ", 50 , 0 , &(pT->title));
+        if(wI) //Falls Medium-Interpret leer -> Einzelne Interpreten abfragen
         {
-            getText("Geben Sie bitte den Interpreten an: " , 50 , 0 ,&pTrack->interpret);
+            getText("Geben Sie bitte den Interpreten an: " , 50 , 0 , &(pT->interpret));
         }
-        getTime("Geben Sie bitte die Dauer des Tracks ein\n(Format hh:mm:ss oder mm:ss) : ",&pTrack->lp));
-		i++; //Zum naechsten Feld von Tracks springen
-		
-		repeat = askAgain(); //weiteren Track eingeben?
-    }while(repeat); //Wiederholen solange askAgain = 1 = Ja
-	
-	//Gesamtanzahl der Tracks des Mediums = Anzahl der eingegebenen Tracks
-	*pTotalnumber = i; 
-	
-	//Naechstes Medium
-    MediaCounter++;
+        getTime("Geben Sie bitte die Dauer des Tracks ein\n(Format hh:mm:ss oder mm:ss) : ",&(pT->lp));	 
 
+	return 0;
 }
 /**********************************************************
  * FUNCTION:        searchTrack 
@@ -135,25 +124,25 @@ void listMedia()
     if (MediaCounter == 0)
     {
         printf("Keine Medien vorhanden!\n");
-        return;
     }
-
-    //Ausgabe aller Medien
-    for(i = 0 ; i < MediaCounter ; i++)
-    {
-        listOneMedia(i);
-    }
+	else
+	{
+    	//Ausgabe aller Medien
+    	for(i = 0 ; i < MediaCounter ; i++)
+    	{
+    	    listOneMedia(i);
+    	}
+	}
 }
 
 void listOneMedia(int Mediennr)
 {
-    //laufvariable
-    int i = 0;
+    int i = 0; //Laufvariable
 
 
     //Ausgabe der Medieninformationen
     printf("Titel             : %s\n", Medias[Mediennr].title);
-    if(Medias[Mediennr].interpret != '\n')
+    if(Medias[Mediennr].interpret != NULL)
     {
         printf("Interpret         : %s\n", Medias[Mediennr].interpret);
     }
@@ -166,7 +155,7 @@ void listOneMedia(int Mediennr)
 
 }
 
-void listOneTrack(int Mediennr, int Totalnumber)
+void listOneTrack(int Mediennr, unsigned int Totalnumber)
 {
     //Laufvariable
     int i = 0;
@@ -177,7 +166,7 @@ void listOneTrack(int Mediennr, int Totalnumber)
     {
 
         printf("%i. %s von ",(i + 1), Medias[Mediennr].Tracks[i].title );
-        if(Medias[Mediennr].interpret == \n)
+        if(Medias[Mediennr].interpret == NULL)
         {
             printf("%s ", Medias[Mediennr].Tracks[i].interpret);
         }
