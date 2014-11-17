@@ -57,11 +57,10 @@
         
         pos = strTime[0];
      
-        {
+        
             while (*pos != '\0') //zählt die Trennzeichen bis zum Ende des Strings
             {
                 if (*pos == c)
-                
                     count++;
                 pos++;
             }
@@ -127,7 +126,7 @@
                 }
         }
      
-        int checkTime (TTime * Zeit , int legit, char *strTime)
+        int checkTime (TTime *Zeit , int legit, char *strTime)
         {
             //Laufvariable
             int k = 0;
@@ -161,7 +160,7 @@
                 return 1;
             }
         }
-    } 
+     
         
      
      

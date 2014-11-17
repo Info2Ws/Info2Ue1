@@ -1,6 +1,9 @@
 #ifndef _DATASTRUCTURE_H_
 #define _DATASTRUCTURE_H_
 
+#include <stdlib.h>
+#include <stdio.h>
+
 #define MAXTRACKS  20
 #define MAXMEDIA 20
 
@@ -9,7 +12,7 @@ typedef struct
 	int hour;
 	int minute;
 	int second;
-} TTime; //neuer Typ TTime_t
+}TTime; //neuer Typ TTime_t
 
 
 typedef enum

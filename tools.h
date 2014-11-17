@@ -1,9 +1,10 @@
-#ifndef _TOOLS_
-#define _TOOLS_
+#ifndef _TOOLS_H_
+#define _TOOLS_H_
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "media.h"
 #include <string.h>
+#include "media.h"
 
 /** Funktions-Prototypen **/
 void clearBuffer();

@@ -6,7 +6,7 @@
 #include "tools.h"
 #include "datetime.h"
 
-int Mediacounter = 0;
+int MediaCounter = 0;
 TMedia Medias[MAXMEDIA];
 
 

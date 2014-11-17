@@ -1,6 +1,9 @@
 #ifndef _DATETIME_H_
 #define _DATETIME_H_
 
+#include "datastructure.h"
+
+
 /******************************************************
 * FUNKTION: printTime
 *-----------------------------------------------------
