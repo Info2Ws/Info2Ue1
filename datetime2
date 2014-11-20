@@ -59,7 +59,7 @@ do{
         {
               pStd = NULL;
               pMin = strTime[0];
-              pSek = ((strrchr(*strTime, ':')+1));
+              pSek = ((strrchr(strTime, ':')+1));
               Std = 00;
               Min = atoi(pMin);
               Sek = atoi(pSek);
