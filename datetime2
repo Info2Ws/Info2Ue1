@@ -4,6 +4,9 @@
 #include<string.h>
 #include <ctype.h>
 
+void getTime(char *Text, TTime *lp)
+{
+
 
 
     char *strTime[9];
