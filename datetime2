@@ -60,7 +60,7 @@ do{
               pStd = NULL;
               pMin = strTime[0];
               pSek = ((strrchr(strTime, ':')+1));
-              Std = 00;
+              Std = NULL;
               Min = atoi(pMin);
               Sek = atoi(pSek);
               if(Min<60 && Sek<60)
