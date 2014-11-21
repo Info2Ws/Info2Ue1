@@ -37,7 +37,7 @@ void createMedia()
 	printf("Geben Sie bitte die Daten der einzelnen Tracks ein:\n\n");    
 	do
 	{
-		if(createTrack(M->Tracks + M->Totalnumber, (M->interpret == NULL))){
+		if((createTrack(M->Tracks + M->Totalnumber, M->interpret)) == NULL){
 			(M->Totalnumber)++;
 			((M->Tracks + M->Totalnumber)->Tracknr) = M->Totalnumber;
 		}

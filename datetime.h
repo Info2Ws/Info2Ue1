@@ -25,9 +25,7 @@
 /** Funktions-Pototypen **/
 
 
-    void printTime(TTime *Zeit);
-    void getTime(char *Text, TTime *Zeit);
-    void splitstring (TTime *Zeit, char c, char ***arr);
-    int checkTime (TTime *Zeit , int legit, char *strTime);
+    void getTime(char *Text, TTime *lp);
+    int checkTime(int Std, int Min, int Sek,  TTime *lp);
 #endif
      
