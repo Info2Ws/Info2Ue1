@@ -32,9 +32,9 @@ void getTime(char * Text,TTime * lp)
         //Eingabeaufforderung
         printf("%s", Text);
 
-        lp->minute  = atoi(NULL);
-        lp->second = atoi(NULL);
-        lp->hour  = atoi(NULL);
+        //lp->minute  = atoi(NULL); //erzeugt Speicherzugriffsfehler
+        //lp->second = atoi(NULL);
+        //lp->hour  = atoi(NULL);
 
         //Eingabe des Benutzers
         fgets(strTime,9,stdin);
@@ -147,7 +147,7 @@ int checkTime(TTime * lp ,int truth, char * strTime)
 void printTime(TTime * lp)
 {
     //Ausgabe der Zeit
-    printf("%02i:%02i:%02i", lp->hour, lp->minute , lp ->second );
+    printf("%02i:%02i:%02i", lp->hour, lp->minute , lp->second );
 
 }
 
