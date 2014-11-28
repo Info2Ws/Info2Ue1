@@ -81,7 +81,7 @@ int createTrack(TTrack *pT, int wI)
 	printf("Track %i\n\n\n", pT->Tracknr + 1);
     
 	getText("Geben Sie bitte den Titel des Tracks an: ", 50 , 0 , &(pT->title));
-        if(wI) //Falls Medium-Interpret leer -> Einzelne Interpreten abfragen
+        if(!wI) //Falls Medium-Interpret leer -> Einzelne Interpreten abfragen
         {
             getText("Geben Sie bitte den Interpreten an: " , 50 , 0 , &(pT->interpret));
         }

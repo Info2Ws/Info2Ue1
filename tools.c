@@ -130,7 +130,7 @@ int getText(char *prompt, int plength, int allowempty, char **input)
         do
         {
             //Eingabeaufforderung ausgeben
-            printf("\n%s, (max. %i Zeichen): ", prompt, plength);
+            printf("\n%s (max. %i Zeichen): ", prompt, plength);
             //Einlesen des Aufgeforderten
             scanreturn = scanf(format, tempinput);
             clearBuffer();

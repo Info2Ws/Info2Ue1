@@ -28,6 +28,14 @@ void getTime(char * Text,TTime * lp)
     {
         //Eingabeaufforderung
         printf("%s", Text);
+<<<<<<< HEAD
+=======
+
+        //lp->minute  = atoi(NULL); //erzeugt Speicherzugriffsfehler
+        //lp->second = atoi(NULL);
+        //lp->hour  = atoi(NULL);
+
+>>>>>>> eb0ace1ef0c5e351c40a7d1754b2b79b0829fb08
         //Eingabe des Benutzers
         fgets(strTime,9,stdin);
         clearBuffer();
