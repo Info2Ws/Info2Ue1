@@ -1,4 +1,3 @@
-
 #include"datastructure.h"
 #include"datetime.h"
 #include<stdlib.h>
@@ -25,48 +24,38 @@ int checkZeit2;
 
 void getTime(char * Text,TTime * lp)
 {
-
-
     do
     {
         //Eingabeaufforderung
         printf("%s", Text);
-
-        lp->minute  = atoi(NULL);
-        lp->second = atoi(NULL);
-        lp->hour  = atoi(NULL);
-
         //Eingabe des Benutzers
         fgets(strTime,9,stdin);
         clearBuffer();
 
-
-
         //Kontrollieren ob zeit gültige eingabe
         checkZeit2 = (checkTime(lp, 1 , strTime));
-
+        checkZeit = (checkTime(lp, 0 , strTime));
         //Konvertierung der Zeichenkette zu Integer werten
         convertStringToTime(strTime,lp);
-
+        printf("%04i",checkZeit2);//0001
+        printf("%04i",checkZeit);//0000
         if(!checkZeit2)
         {
-            printf("Falsche Eingabe! Format (hh:mm:ss oder mm:ss)\n Fortfahren mit Enter");
+            sprintf("Falsche Eingabe! Format (hh:mm:ss oder mm:ss) \n Fortfahren mit Enter");
             clearBuffer();
         }
 
         //Kontrollieren ob zeit gültige integer werte
-        checkZeit = checkTime(lp, 0 , strTime);
 
-//        Fehlermeldung
         if(!checkZeit)
         {
-            printf("Falsche Eingabe! Format (hh:mm:ss oder mm:ss)\n Fortfahren mit Enter");
+            sprintf("Falsche Eingabe! Format (hh:mm:ss oder mm:ss)\n Fortfahren mit Enter");
             clearBuffer();
         }
 
     }
-    while(checkZeit != checkZeit2 );
 
+    while(checkZeit != checkZeit2 );
 
 }
 
@@ -77,26 +66,33 @@ void convertStringToTime(char * strTime , TTime * lp)
     char * pStd         = NULL ;
     char * pMin         = NULL ;
 
-
-    if (isdigit(strTime[0]))
+    len=strlen(strTime);
+    if (isdigit(*strTime) && len > 2 )
     {
         pStd = &strTime[0];
-        pMin = ((strchr(strTime, ':')+1));
-        pSek = ((strrchr(strTime, ':')+1));
         Std = atoi(pStd);
-        Min = atoi(pMin);
-        Sek = atoi(pSek);//Aufspaltung der Zeit in stunde minute sekunde
+        if((strchr(strTime, ':')) && (*(strrchr(strTime,':')+1) != (*(strchr(strTime,':')+1))))
+        {
+            pMin = ((strchr(strTime, ':')+1));
+            pSek = ((strrchr(strTime, ':')+1));
+            Min = atoi(pMin);
+            Sek = atoi(pSek);
+            if(Min == Sek)
+            {
+                printf("xxx");
+                pSek = pMin;
+                Sek = atoi(pMin);
+                Min = atoi(pStd);
+                pMin = pStd;
+                printf("%02i:%02i:%02i",Std,Min,Sek);
 
+            }
+            printf("%02i:%02i:%02i",Std,Min,Sek);//Aufspaltung der Zeit in stunde minute sekunde
+        }
 
 
         //wandern der pointer bei std = 0
-        while (pSek == NULL)
-        {
-            pSek = pMin;
 
-            pMin = pStd;
-            pStd = NULL;
-        }
 
         //Konvertieren der strings zu
         if (pStd)
@@ -116,38 +112,48 @@ int checkTime(TTime * lp ,int truth, char * strTime)
     if(truth == 0)
     {
 
-        if((lp->second > 60)||(lp->minute > 60 )||(lp->hour >99))
-            return 0;
-        else
+        if((lp->second < 60)||(lp->minute < 60 )||(lp->hour <99))
+        {
+
             return 1;
+        }
+        else
+        {
+
+
+            return 0;
+        }
     }
 
     //Kontrolle der string eingabe
     if(truth == 1)
     {
-
-        while(*(strTime + i))
+        if(strrchr(strTime,':'))
         {
-            if(((*(strTime + i) < '0') || (*(strTime + i) > '9' )) && (*(strTime + i) != ':'))
+            while(*(strTime + i))
             {
+                if(((*(strTime + i) < '0') || (*(strTime + i) > '9' )) && (*(strTime + i) != ':'))
+                {
+                    return 0;
+                    i++;
+                }
 
-                return 0;
+                if(((*(strTime + i) >= '0') && (*(strTime + i) <= '9' )))
+                {
+                    return 1;
+                    i++;
+                }
 
             }
 
-            i++;
         }
-
-        return 1;
     }
-
-    return checkZeit;
 }
 
 void printTime(TTime * lp)
 {
     //Ausgabe der Zeit
-    printf("%02i:%02i:%02i", lp->hour, lp->minute , lp ->second );
+    printf("%02i:%02i:%02i", lp->hour, lp->minute , lp->second );
 
 }
 
