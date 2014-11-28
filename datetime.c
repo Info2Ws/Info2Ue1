@@ -7,12 +7,11 @@
 #include<ctype.h>
 
 
-char *pStd;
-char *pMin;
-char *pSek;
+//char *pStd;
+//char *pMin;
+//char *pSek;
 char *pos;
 char *lp;
-int Std,Min,Sek;
 int count;
 char c;
 int len;
@@ -32,11 +31,11 @@ void getTime(char * Text,TTime * lp)
         fgets(strTime,9,stdin);
         clearBuffer();
 
+        //Konvertierung der Zeichenkette zu Integer werten
+        convertStringToTime(strTime,lp);
         //Kontrollieren ob zeit gültige eingabe
         checkZeit2 = (checkTime(lp, 1 , strTime));
         checkZeit = (checkTime(lp, 0 , strTime));
-        //Konvertierung der Zeichenkette zu Integer werten
-        convertStringToTime(strTime,lp);
         printf("%04i",checkZeit2);//0001
         printf("%04i",checkZeit);//0000
         if(!checkZeit2)
@@ -65,29 +64,30 @@ void convertStringToTime(char * strTime , TTime * lp)
     //Zeiger deklaration
     char * pStd         = NULL ;
     char * pMin         = NULL ;
+    char * pSek         = NULL;
+    int Std,Min,Sek;
 
     len=strlen(strTime);
     if (isdigit(*strTime) && len > 2 )
     {
-        pStd = &strTime[0];
-        Std = atoi(pStd);
-        if((strchr(strTime, ':')) && (*(strrchr(strTime,':')+1) != (*(strchr(strTime,':')+1))))
+        if((strchr(strTime, ':')) && (strrchr(strTime,':')) != (strchr(strTime,':')))
         {
+            pStd = strTime;
             pMin = ((strchr(strTime, ':')+1));
             pSek = ((strrchr(strTime, ':')+1));
+            Std = atoi(pStd);
             Min = atoi(pMin);
             Sek = atoi(pSek);
-            if(Min == Sek)
-            {
-                printf("xxx");
-                pSek = pMin;
-                Sek = atoi(pMin);
-                Min = atoi(pStd);
-                pMin = pStd;
-                printf("%02i:%02i:%02i",Std,Min,Sek);
-
-            }
             printf("%02i:%02i:%02i",Std,Min,Sek);//Aufspaltung der Zeit in stunde minute sekunde
+        }
+        else if((strchr(strTime, ':')) && (strrchr(strTime,':')) == (strchr(strTime,':')))
+        {
+            pMin = strTime;
+            pSek = ((strrchr(strTime, ':')+1));
+            Std = 0;
+            Min = atoi(pMin);
+            Sek = atoi(pSek);
+            printf("%02i:%02i",Min,Sek);//Aufspaltung der Zeit in stunde minute sekunde
         }
 
 
@@ -95,12 +95,9 @@ void convertStringToTime(char * strTime , TTime * lp)
 
 
         //Konvertieren der strings zu
-        if (pStd)
-            lp->hour = Std;
-        if (pMin)
-            lp->minute = Min;
-        if (pSek)
-            lp->second = Sek;
+        lp->hour = Std;
+        lp->minute = Min;
+        lp->second = Sek;
 
     }
 }
@@ -112,7 +109,7 @@ int checkTime(TTime * lp ,int truth, char * strTime)
     if(truth == 0)
     {
 
-        if((lp->second < 60)||(lp->minute < 60 )||(lp->hour <99))
+        if((lp->second < 60)&&(lp->minute < 60 )&&(lp->hour <99))
         {
 
             return 1;

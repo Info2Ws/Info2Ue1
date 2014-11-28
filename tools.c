@@ -78,11 +78,12 @@ void printLine(char c, int n)
 int askAgain()
 {
     char choice;
-    printf("\nWeiteren Track eingeben? (J/n): ");
-    scanf("%c", &choice);
-    clearBuffer();
     while(1)
     {
+        printf("\nWeiteren Track eingeben? (J/n): ");
+        scanf("%c", &choice);
+        if (choice != '\n')
+            clearBuffer();
         if(choice == 'J' || choice == 'j'|| choice == '\n')
         {
             return 1;
