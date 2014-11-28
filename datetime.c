@@ -41,7 +41,7 @@ void getTime(char * Text,TTime * lp)
         printf("%04i",checkZeit);//0000
         if(!checkZeit2)
         {
-            sprintf("Falsche Eingabe! Format (hh:mm:ss oder mm:ss) \n Fortfahren mit Enter");
+            printf("Falsche Eingabe! Format (hh:mm:ss oder mm:ss) \n Fortfahren mit Enter");
             clearBuffer();
         }
 
@@ -49,7 +49,7 @@ void getTime(char * Text,TTime * lp)
 
         if(!checkZeit)
         {
-            sprintf("Falsche Eingabe! Format (hh:mm:ss oder mm:ss)\n Fortfahren mit Enter");
+            printf("Falsche Eingabe! Format (hh:mm:ss oder mm:ss)\n Fortfahren mit Enter");
             clearBuffer();
         }
 
@@ -128,7 +128,7 @@ int checkTime(TTime * lp ,int truth, char * strTime)
     //Kontrolle der string eingabe
     if(truth == 1)
     {
-        if(strrchr(strTime,':'))
+        if(strchr(strTime,':'))
         {
             while(*(strTime + i))
             {
