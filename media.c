@@ -165,10 +165,10 @@ void listOneTrack(int Mediennr, unsigned int Totalnumber)
     for( i = 0 ; i < (Totalnumber) ; i++ )
     {
 
-        printf("%i. %s von ",(i + 1), Medias[Mediennr].Tracks[i].title );
+        printf("%i. %s ",(i + 1), Medias[Mediennr].Tracks[i].title );
         if(Medias[Mediennr].interpret == NULL)
         {
-            printf("%s ", Medias[Mediennr].Tracks[i].interpret);
+            printf("von %s ", Medias[Mediennr].Tracks[i].interpret);
         }
         printTime(&(Medias[Mediennr].Tracks[i].lp));
         printf(" )\n");
