@@ -149,7 +149,7 @@ int getText(char *prompt, int plength, int allowempty, char **input)
                     }
                     else
                     {
-                        fprintf(stderr, "FEHLER! ZU WENIG SPEICHER");
+                        fprintf(stderr, "\nFEHLER: Zu wenig Speicher!\n");
                         return 0;
                     }
                     
@@ -162,7 +162,7 @@ int getText(char *prompt, int plength, int allowempty, char **input)
             }
             else
             {
-                printf("\nDas Feld dar nicht leer bleiben!\n");
+                printf("\nDas Feld darf nicht leer bleiben!\n");
             }
                 
         }while(scanreturn == 0);

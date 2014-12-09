@@ -21,16 +21,16 @@
 int main()
 {
     char * menutitle = "Medien-Verwaltung Deluxe";      //wir brauchen einen besseren namen..
-    char * menu[7] = {"1. Neues Medium anlegen", "2. Medium bearbeiten", 
+    char * menu[8] = {"1. Neues Medium anlegen", "2. Medium bearbeiten", 
 	"3. Medium loeschen", "4. nach Tracks suchen", "5. Tracks sortieren", 
-	"6. Medien auflisten", "7. Programm beenden"};
+	"6. Medien auflisten", "7. Programm beenden", "8. TestSave"};
     int choice = 0;            //Auswahlvariable
     int exit = 1;   //Abbruchvariable für fußgesteuerte Schleife
 
 
     do
 	{
-        choice = getMenu(menutitle, menu, 7, 1); //Aufruf des Menüs
+        choice = getMenu(menutitle, menu, 8, 1); //Aufruf des Menüs
 
         switch(choice) //Ausgabe des Menüpunktes
         {
@@ -41,6 +41,7 @@ int main()
                 case 5: sortTracks();	break;
                 case 6: listMedia();	break;
                 case 7: exit = 0;		break;
+                case 8: saveMedia();    break;
         }
         waitForEnter();
     }while(exit);
