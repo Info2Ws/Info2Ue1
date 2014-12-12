@@ -29,6 +29,7 @@ void createMedia()
     getText("Geben Sie bitte den Interpreten ein\n(Bei mehreren Interpreten Feld leer lassen):", 
 	50 , 1 , &(M->interpret));
     //getText("Geben Sie bitte den Typ ein: ", 50 , 0 , &(M->Type));
+    getNumber("Geben Sie bitte den Medientyp ein:\n1: CD\n2: DVD\n3: Blueray\n4: Sonstiges\n", &(M->Type), 1 , 4);
     getNumber("Geben Sie bitte das Erscheinungsjahr ein: ", &(M->Releasedate), 1950 , 2099);
     M->Totalnumber = 0;
 

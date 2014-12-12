@@ -188,7 +188,7 @@ int getNumber(char *prompt, int **input, int from, int to)
     do
     {
         //Eingabeaufforderung und Einlesen
-        printf("\n%s (von %i bis %i): ", prompt, from, to);
+        printf("\n%s(von %i bis %i): ", prompt, from, to);
         scanreturn = scanf("%i", input);
         clearBuffer();
         
