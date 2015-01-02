@@ -1,3 +1,10 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "tools.h"
+#include "media.h"
+#include "datetime.h"
+#include "datastructure.h"
 #include "database.h"
 
 
@@ -15,6 +22,182 @@
  **********************************************************
  **********************************************************/
 
+/**********************************************************
+ * FUNCTION:        loadMedia 
+ * --------------------------------------------------------
+ * DESCRIPTION:     will load all saved media from file
+ * STATUS:          
+ **********************************************************/ 
+ int loadMedia()
+ {
+	FILE *data;
+    char *text;
+    void *dataField;
+    void *MediaField;
+    void *dataEnd = NULL;
+
+    /* Check beim Öffnen der Datei, ob erfolgreich) */
+    if((data = fopen("database.dat", "w")) == NULL)
+    {
+        fprintf(stderr, "FEHLER: Datei konnte nicht geöffnet werden!\n");
+        return 0;
+    }
+
+    /* Pointer auf <Data> */
+    text = calloc(256, sizeof(char));
+    fgets(text, 255, data);
+    dataField = strstr(text, "<Data>");
+    free(text);
+
+    /* Fehlerprüfung: Pointer auf <Data> nicht vorhanden? */
+    if (dataField == NULL)
+    {
+        fprintf(stderr, "FEHLER: Datenbank fehlerhaft!\n");
+        return 0;
+    }
+    while (dataEnd == NULL)
+    {
+        text = calloc(256, sizeof(char));
+        fgets(text, 255, data);
+        MediaField = strstr(text, "<Media>");
+        dataEnd = strstr(text, "</Data>");
+        free(text);
+        if (MediaField != NULL) /* Medium-Tag gefunden */
+        {
+            loadOneMedia(data);
+        }
+    }
+    fclose(data);
+    printf("Datenbank erfolgreich geladen.\n");
+    return 1;
+ }
+
+ /**********************************************************
+ * FUNCTION:        loadOneMedia 
+ * --------------------------------------------------------
+ * DESCRIPTION:     will load one media from file
+ * STATUS:          
+ **********************************************************/
+ void loadOneMedia(FILE * data)
+ {
+    char * line;
+    char * text;
+    void * matchTag;
+    int MediaEnd = 0;
+    int len;
+    int TrackNr = 0;
+
+    while (!MediaEnd)
+    {
+        line = calloc(256, sizeof(char));
+        fgets(line, 255, data);
+        if (matchTag = strstr(line, "<Interpret>"))
+        {
+            len = strlen(line);
+            line[len - 13] = '\0';
+            text = (char *) matchTag;
+            text += 11;
+            (Media + MediaCounter)->interpret = calloc(len - 23, sizeof(char));
+            //if (strlen(text) == 0)
+            //    (Media + MediaCounter)->boolSameInterpret = 0;
+            //else
+            //    (Media + MediaCounter)->boolSameInterpret = 1;
+            strcpy((Media + MediaCounter)->interpret, text);
+        }
+        if (matchTag = strstr(line, "<Title>"))
+        {
+            len = strlen(line);
+            line[len - 9] = '\0';
+            text = (char *) matchTag;
+            text += 7;
+            (Media + MediaCounter)->title = calloc(len - 16, sizeof(char));
+            strcpy((Media + MediaCounter)->title, text);
+        }
+        if (matchTag = strstr(line, "<Releasedate>"))
+        {
+            len = strlen(line);
+            line[len - 15] = '\0';
+            text = (char *) matchTag;
+            text += 13;
+            (Media + MediaCounter)->Releasedate = atoi(text);
+        }
+        if (matchTag = strstr(line, "<Track>"))
+        {
+            loadOneTrack(data, TrackNr);
+            TrackNr++;
+        }
+
+        if (matchTag = strstr(line, "</Media>"))
+        {
+            (Media + MediaCounter)->Totalnumber = TrackNr;
+            MediaEnd = 1;
+        }
+        free(line);
+    }
+    MediaCounter++;
+ }
+ 
+/**********************************************************
+ * FUNCTION:        loadOneTrack 
+ * --------------------------------------------------------
+ * DESCRIPTION:     will load one Track from file
+ * STATUS:          
+ **********************************************************/
+ void loadOneTrack(FILE * data, int TrackNr)
+ {
+    char * line;
+    char * text;
+    void * matchTag;
+    int TrackEnd = 0;
+    int len;
+
+    while (!TrackEnd)
+    {
+        line = calloc(256, sizeof(char));
+        fgets(line, 255, data);
+        if ((matchTag = strstr(line, "<Title>")))
+        {
+            len = strlen(line);
+            line[len - 9] = '\0';
+            text = (char *) matchTag;
+            text += 7;
+            (Media + MediaCounter)->Tracks[TrackNr].title = calloc(len - 16, sizeof(char));
+            strcpy((Media + MediaCounter)->Tracks[TrackNr].title, text);
+        }
+        if (matchTag = strstr(line, "<Interpret>"))
+        {
+            len = strlen(line);
+            line[len - 13] = '\0';
+            text = (char *) matchTag;
+            text += 11;
+            (Media + MediaCounter)->Tracks[TrackNr].interpret = calloc(len - 16, sizeof(char));
+            strcpy((Media + MediaCounter)->Tracks[TrackNr].interpret , text);
+
+        }
+
+        if (matchTag = strstr(line, "<Duration>"))
+        {
+            len = strlen(line);
+
+            line[len - 12] = '\0';
+            text = (char *) matchTag;
+            text += 10;
+
+            //convertStringToTime(&((Media + MediaCounter)->Tracks[TrackNr].lp), text);
+
+        }
+
+        if (matchTag = strstr(line, "</Track>"))
+        {
+            TrackEnd = 1;
+        }
+        free(line);
+    }
+
+    return 1;
+ }
+
+ 
 /**********************************************************
  * FUNCTION:        saveMedia 
  * --------------------------------------------------------

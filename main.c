@@ -7,7 +7,7 @@
 *-----------------------------------------------------
 * ERSTELLT VON: 
 *           AM: 19.10.2014
-* ÄNDERUNGEN  : 28.10.2014
+* ÄNDERUNGEN  : 12.12.2014
 ******************************************************/
 
 #include <stdio.h>
@@ -17,17 +17,19 @@
 #include "menu.h"
 #include "tools.h"
 #include "datetime.h"
+#include "database.h"
 
 int main()
 {
     char * menutitle = "Medien-Verwaltung Deluxe";      //wir brauchen einen besseren namen..
     char * menu[8] = {"1. Neues Medium anlegen", "2. Medium bearbeiten", 
 	"3. Medium loeschen", "4. nach Tracks suchen", "5. Tracks sortieren", 
-	"6. Medien auflisten", "7. Programm beenden", "8. TestSave"};
+	"6. Medien auflisten", "7. Medien speichern", "8. Programm beenden"};
     int choice = 0;            //Auswahlvariable
     int exit = 1;   //Abbruchvariable für fußgesteuerte Schleife
 
-
+	loadMedia(); //Laden der Datenbank von Datei
+	
     do
 	{
         choice = getMenu(menutitle, menu, 8, 1); //Aufruf des Menüs
@@ -40,8 +42,8 @@ int main()
                 case 4: searchTrack();	break;
                 case 5: sortTracks();	break;
                 case 6: listMedia();	break;
-                case 7: exit = 0;		break;
-                case 8: saveMedia();    break;
+                case 7: saveMedia();	break;
+                case 8: exit = 0;    	break;
         }
         waitForEnter();
     }while(exit);

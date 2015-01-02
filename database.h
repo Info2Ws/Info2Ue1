@@ -6,6 +6,9 @@
 #include "datastructure.h"
 
 /* Funktions Prototypen */
+int loadMedia();
+void loadOneMedia(FILE * data);
+void loadOneTrack(FILE * data, int TrackNr);
 int saveMedia();
 void saveOneMedia(FILE *data, int CurrentMedium);
 void saveOneTrack(FILE *data, TMedia *Medium, int TrackNumber);
