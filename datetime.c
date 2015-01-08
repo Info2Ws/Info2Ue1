@@ -82,7 +82,7 @@ void convertStringToTime(char * strTime , TTime * lp)
 		lp->hour = Std;
 		lp->minute = Min;
 		lp->second = Sek;
-        printf("\nsecond %i", lp->second);
+        printf("\nsecond %i\n", lp->second);
 	}
 }
 int checkTime(TTime * lp ,int truth, char * strTime)

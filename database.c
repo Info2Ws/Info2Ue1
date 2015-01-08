@@ -37,7 +37,7 @@
     void *dataEnd = NULL;
 
     /* Check beim Öffnen der Datei, ob erfolgreich) */
-    if((data = fopen("database.dat", "w")) == NULL)
+    if((data = fopen("database.dat", "r")) == NULL)
     {
         fprintf(stderr, "FEHLER: Datei konnte nicht geöffnet werden!\n");
         return 0;
@@ -97,12 +97,12 @@
             line[len - 13] = '\0';
             text = (char *) matchTag;
             text += 11;
-            (Media + MediaCounter)->interpret = calloc(len - 23, sizeof(char));
+            (Medias + MediaCounter)->interpret = calloc(len - 23, sizeof(char));
             //if (strlen(text) == 0)
             //    (Media + MediaCounter)->boolSameInterpret = 0;
             //else
             //    (Media + MediaCounter)->boolSameInterpret = 1;
-            strcpy((Media + MediaCounter)->interpret, text);
+            strcpy((Medias + MediaCounter)->interpret, text);
         }
         if (matchTag = strstr(line, "<Title>"))
         {
@@ -110,8 +110,8 @@
             line[len - 9] = '\0';
             text = (char *) matchTag;
             text += 7;
-            (Media + MediaCounter)->title = calloc(len - 16, sizeof(char));
-            strcpy((Media + MediaCounter)->title, text);
+            (Medias + MediaCounter)->title = calloc(len - 16, sizeof(char));
+            strcpy((Medias + MediaCounter)->title, text);
         }
         if (matchTag = strstr(line, "<Releasedate>"))
         {
@@ -119,7 +119,7 @@
             line[len - 15] = '\0';
             text = (char *) matchTag;
             text += 13;
-            (Media + MediaCounter)->Releasedate = atoi(text);
+            (Medias + MediaCounter)->Releasedate = atoi(text);
         }
         if (matchTag = strstr(line, "<Track>"))
         {
@@ -129,7 +129,7 @@
 
         if (matchTag = strstr(line, "</Media>"))
         {
-            (Media + MediaCounter)->Totalnumber = TrackNr;
+            (Medias + MediaCounter)->Totalnumber = TrackNr;
             MediaEnd = 1;
         }
         free(line);
@@ -161,8 +161,8 @@
             line[len - 9] = '\0';
             text = (char *) matchTag;
             text += 7;
-            (Media + MediaCounter)->Tracks[TrackNr].title = calloc(len - 16, sizeof(char));
-            strcpy((Media + MediaCounter)->Tracks[TrackNr].title, text);
+            (Medias + MediaCounter)->Tracks[TrackNr].title = calloc(len - 16, sizeof(char));
+            strcpy((Medias + MediaCounter)->Tracks[TrackNr].title, text);
         }
         if (matchTag = strstr(line, "<Interpret>"))
         {
@@ -170,8 +170,8 @@
             line[len - 13] = '\0';
             text = (char *) matchTag;
             text += 11;
-            (Media + MediaCounter)->Tracks[TrackNr].interpret = calloc(len - 16, sizeof(char));
-            strcpy((Media + MediaCounter)->Tracks[TrackNr].interpret , text);
+            (Medias + MediaCounter)->Tracks[TrackNr].interpret = calloc(len - 16, sizeof(char));
+            strcpy((Medias + MediaCounter)->Tracks[TrackNr].interpret , text);
 
         }
 

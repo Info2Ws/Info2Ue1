@@ -86,7 +86,7 @@ int createTrack(TTrack *pT, int wI)
         {
             getText("Geben Sie bitte den Interpreten an: " , 50 , 0 , &(pT->interpret));
         }
-        getTime("Geben Sie bitte die Dauer des Tracks ein\n(Format hh:mm:ss oder mm:ss) : ",&(pT->lp));	 
+        getTime("Geben Sie bitte die Dauer des Tracks ein\n(Format hh:mm:ss oder mm:ss) : ", &(pT->lp));
 
 	return 0;
 }
