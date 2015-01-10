@@ -5,6 +5,8 @@
 #include "datastructure.h"
 #include "tools.h"
 #include "datetime.h"
+#include "menu.h"
+#include "sort.h"
 
 int MediaCounter = 0;
 TMedia Medias[MAXMEDIA];
@@ -105,8 +107,26 @@ void searchTrack()
  * DESCRIPTION:
  *********************************************************/
 void sortTracks()
-{
-	printf("sortTracks");
+{	
+	char * submenutitle = "Sortieren";
+    char * menu[5] = {"1. Tracks nach Tracknr. sortieren", "2. Tracks nach Titel sortieren", 
+	"3. Tracks nach Interpret sortieren", "4. Tracks nach Dauer sortieren", "5. zurueck zum Hauptmenue"};
+    int choice = 0; //Auswahlvariable
+    int exit = 1; //Abbruchvariable für fußgesteuerte Schleife
+	    do
+	{
+        choice = getMenu(submenutitle, menu, 5, 1); //Aufruf des Submenüs
+
+        switch(choice) //Ausgabe des Menüpunktes
+        {
+                case 1: sort();	break; //Vergleichsfunktion erhält 2 Zeiger auf Tracknr.
+                case 2: sort();	break; //Vergleichsfunktion erhält 2 Zeiger auf Titel.
+                case 3: sort();	break; //Vergleichsfunktion erhält 2 Zeiger auf Interpreten.
+                case 4: sort();	break; //Vergleichsfunktion erhält 2 Zeiger auf Trackdauer
+                case 5: exit = 0;		break;
+        }
+        waitForEnter();
+    }while(exit);
 }
 /**********************************************************
  * FUNCTION:        listMedia 
