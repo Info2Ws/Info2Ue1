@@ -40,7 +40,7 @@ void createMedia()
 	{
 		if((createTrack(M->Tracks + M->Totalnumber, M->interpret)) == NULL){
 			(M->Totalnumber)++;
-			((M->Tracks + M->Totalnumber)->Tracknr) = M->Totalnumber;
+			((M->Tracks + M->Totalnumber - 1)->Tracknr) = M->Totalnumber;
 		}
 		else
 		{
@@ -79,7 +79,7 @@ void deleteMedia()
 int createTrack(TTrack *pT, int wI)
 {
 	// Abfrage der Trackinformationen	
-	printf("Track %i\n\n\n", pT->Tracknr + 1);
+	printf("Track %i\n\n\n", pT->Tracknr);
     
 	getText("Geben Sie bitte den Titel des Tracks an: ", 50 , 0 , &(pT->title));
         if(!wI) //Falls Medium-Interpret leer -> Einzelne Interpreten abfragen

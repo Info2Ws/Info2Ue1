@@ -273,11 +273,11 @@ void saveOneTrack(FILE *data, TMedia *Medium, int TrackNumber)
     TTime *Time = &(Track->lp);
 
     fprintf(data, "\t\t<Track>\n");
-    fprintf(data, "\t\t\t<Tracknr>%i</Tracknr>\n", (Track->Tracknr));
+    fprintf(data, "\t\t\t<Tracknr>%i</Tracknr>\n", ((Track->Tracknr)));
     fprintf(data, "\t\t\t<Title>%s</Title>\n", (Track->title));
     if((Track->interpret) != NULL)
         fprintf(data, "\t\t\t<Interpret>%s</Interpret>\n", (Track->interpret));
-    fprintf(data, "\t\t\t<Duration>%i:%i:%i</Duration>\n", (Time->hour), (Time->minute), (Time->second));
+    fprintf(data, "\t\t\t<Duration>%02i:%02i:%02i</Duration>\n", (Time->hour), (Time->minute), (Time->second));
     fprintf(data, "\t\t</Track>\n");
 }
 
