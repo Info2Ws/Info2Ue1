@@ -2,6 +2,10 @@
 #define _MEDIA_H_
 
 #include "datastructure.h"
+#include "tools.h"
+#include "datetime.h"
+#include "menu.h"
+#include "sort.h"
 
 void createMedia();
 void editMedia();

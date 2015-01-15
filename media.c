@@ -2,11 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "media.h"
-#include "datastructure.h"
-#include "tools.h"
-#include "datetime.h"
-#include "menu.h"
-#include "sort.h"
 
 int MediaCounter = 0;
 TMedia Medias[MAXMEDIA];
@@ -119,10 +114,10 @@ void sortTracks()
 
         switch(choice) //Ausgabe des Menüpunktes
         {
-                case 1: sort();	break; //Vergleichsfunktion erhält 2 Zeiger auf Tracknr.
-                case 2: sort();	break; //Vergleichsfunktion erhält 2 Zeiger auf Titel.
-                case 3: sort();	break; //Vergleichsfunktion erhält 2 Zeiger auf Interpreten.
-                case 4: sort();	break; //Vergleichsfunktion erhält 2 Zeiger auf Trackdauer
+                case 1: kuhsort(Medias, 0); exit = 0; break; //Tracknr
+                case 2: kuhsort(Medias, 1); exit = 0; break; //Titel
+                case 3: kuhsort(Medias, 2); exit = 0; break; //Interpret
+                case 4: kuhsort(Medias, 3); exit = 0; break; //Trackdauer
                 case 5: exit = 0;		break;
         }
         waitForEnter();

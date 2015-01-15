@@ -107,7 +107,7 @@
         if (matchTag = strstr(line, "<Title>"))
         {
             len = strlen(line);
-            line[len - 9] = '\0';
+            line[len - 10] = '\0';
             text = (char *) matchTag;
             text += 7;
             (Medias + MediaCounter)->title = calloc(len - 16, sizeof(char));
@@ -158,7 +158,7 @@
         if ((matchTag = strstr(line, "<Title>")))
         {
             len = strlen(line);
-            line[len - 9] = '\0';
+            line[len - 10] = '\0';
             text = (char *) matchTag;
             text += 7;
             (Medias + MediaCounter)->Tracks[TrackNr].title = calloc(len - 16, sizeof(char));
@@ -167,7 +167,7 @@
         if (matchTag = strstr(line, "<Interpret>"))
         {
             len = strlen(line);
-            line[len - 13] = '\0';
+            line[len - 14] = '\0';
             text = (char *) matchTag;
             text += 11;
             (Medias + MediaCounter)->Tracks[TrackNr].interpret = calloc(len - 16, sizeof(char));
