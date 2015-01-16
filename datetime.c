@@ -29,7 +29,7 @@ int convertStringToTime(char * strTime , TTime * lp)
 	int len = strlen(strTime);
 	int slot1, slot2, slot3;
 	/*Formatprüfung*/
-	if((len == 8) || (len == 5)) //Formatlänge hh:mm:ss oder mm:ss 
+	if((len == 8) || (len == 6)) //Formatlänge hh:mm:ss oder mm:ss 
 	{
 		/*Zahlen oder ':' an korrekter Stelle*/
 		if((isdigit(strTime[0])) && (isdigit(strTime[1])) && (strTime[2] == ':') && (isdigit(strTime[3])) && (isdigit(strTime[4])))
@@ -39,7 +39,7 @@ int convertStringToTime(char * strTime , TTime * lp)
 				return 1;
 			slot1 = atoi(strTime); //erster Slot als Integer speichern
 			slot2 = atoi(strTime+3); //zweiter Slot als Integer speichern
-			if(len == 5)
+			if(len == 6)
 			{
 				/*Falls mm:ss Format und Zahlen nicht zwischen 0-59 -> Fehlermeldung*/
 				if(!((slot1 >= 0) && (slot1 <= 59)) || !((slot2 >= 0) && (slot2 <= 59)))
