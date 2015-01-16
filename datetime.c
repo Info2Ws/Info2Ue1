@@ -9,12 +9,12 @@
 
 void getTime(char * Text, TTime * lp)
 {
-	char strTime[8];
+	char strTime[9];
 	int len;
 	
 	do{
 		printf("%s", Text);
-		fgets(strTime, 8, stdin);
+		fgets(strTime, 9, stdin);
 		waitForEnter();
 		if(convertStringToTime(strTime, lp)) //evtl. Rückgabewert False = convert...
 		{
