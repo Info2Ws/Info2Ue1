@@ -4,127 +4,74 @@
 #include<stdio.h>
 #include<string.h>
 #include"tools.h"
-#include<ctype.h>
-//char *pStd;
-//char *pMin;
-//char *pSek;
-char *pos;
-////char *lp;
-int count;
-char c;
-int len;
-int i;
-char *zeit;
-char strTime[9];
-int checkZeit;
-int checkZeit2;
-void getTime(char * Text,TTime * lp)
+#include<ctype.h> //wegen isdigit
+
+
+void getTime(char * Text, TTime * lp)
 {
-	do
-	{
-		//Eingabeaufforderung
+	char strTime[8];
+	int len;
+	
+	do{
 		printf("%s", Text);
-		//Eingabe des Benutzers
-		fgets(strTime,9,stdin);
-		clearBuffer();
-		//Konvertierung der Zeichenkette zu Integer werten
-		convertStringToTime(strTime,lp);
-		//Kontrollieren ob zeit gültige eingabe
-		checkZeit2 = (checkTime(lp, 1 , strTime));
-		checkZeit = (checkTime(lp, 0 , strTime));
-		printf("%04i",checkZeit2);//0001
-		printf("%04i",checkZeit);//0000
-		if(!checkZeit2)
+		fgets(strTime, 8, stdin);
+		waitForEnter();
+		if(convertStringToTime(strTime, lp)) //evtl. Rückgabewert False = convert...
 		{
-			printf("Falsche Eingabe! Format (hh:mm:ss oder mm:ss) \n Fortfahren mit Enter");
-			clearBuffer();
+			printf("Falsche Eingabe! Format beachten!")
+			waitForEnter();
 		}
-		//Kontrollieren ob zeit gültige integer werte
-		if(!checkZeit)
-		{
-			printf("Falsche Eingabe! Format (hh:mm:ss oder mm:ss)\n Fortfahren mit Enter");
-			clearBuffer();
-		}
-	}
-	while(checkZeit != checkZeit2 );
+	}while(convertStringToTime(strTime, lp));
 }
-void convertStringToTime(char * strTime , TTime * lp)
+
+int convertStringToTime(char * strTime , TTime * lp)
 {
-	//Zeiger deklaration
-	char * pStd = NULL ;
-	char * pMin = NULL ;
-	char * pSek = NULL;
-	int Std,Min,Sek;
-	len=strlen(strTime);
-	if (isdigit(*strTime) && len > 2 )
+	len = strlen(strTime);
+	int slot1, slot2, slot3;
+	/*Formatprüfung*/
+	if((len == 8) || (len == 5)) //Formatlänge hh:mm:ss oder mm:ss 
 	{
-		if((strchr(strTime, ':')) && (strrchr(strTime,':')) != (strchr(strTime,':')))
+		/*Zahlen oder ':' an korrekter Stelle*/
+		if((isdigit(strTime[0])) && (isdigit(strTime[1])) && (strTime[2] == ':') && (isdigit(strTime[3])) && (isdigit(strTime[4])))
 		{
-			pStd = strTime;
-			pMin = ((strchr(strTime, ':')+1));
-			pSek = ((strrchr(strTime, ':')+1));
-			Std = atoi(pStd);
-			Min = atoi(pMin);
-			Sek = atoi(pSek);
-			printf("%02i:%02i:%02i",Std,Min,Sek);//Aufspaltung der Zeit in stunde minute sekunde
-		}
-		else if((strchr(strTime, ':')) && (strrchr(strTime,':')) == (strchr(strTime,':')))
-		{
-			pMin = strTime;
-			pSek = ((strrchr(strTime, ':')+1));
-			Std = 0;
-			Min = atoi(pMin);
-			Sek = atoi(pSek);
-			printf("%02i:%02i",Min,Sek);//Aufspaltung der Zeit in stunde minute sekunde
-		}
-		//wandern der pointer bei std = 0
-		//Konvertieren der strings zu
-		lp->hour = Std;
-		lp->minute = Min;
-		lp->second = Sek;
-        printf("\nsecond %i\n", lp->second);
-	}
-}
-int checkTime(TTime * lp ,int truth, char * strTime)
-{
-	//Laufvariable
-	int i= 0;
-	//Kontrolle der Integerwerte
-	if(truth == 0)
-	{
-		if((lp->second < 60)&&(lp->minute < 60 )&&(lp->hour <99))
+			/*Falls Format hh:mm:ss und ':ss' nicht korrekt dann Fehlermeldung*/
+			if((len == 8) && (strTime[5] != ':') && (!(isdigit(strTime[6]))) && (!(isdigit(strTime[7]))))
+				return 1;
+			slot1 = atoi(strTime); //erster Slot als Integer speichern
+			slot2 = atoi(strTime+3); //zweiter Slot als Integer speichern
+			if(len == 5)
+			{
+				/*Falls mm:ss Format und Zahlen nicht zwischen 0-59 -> Fehlermeldung*/
+				if(!((slot1 >= 0) && (slot1 <= 59)) || !((slot2 >= 0) && (slot2 <= 59)))
+					return 1;
+				lp->minute = slot1; //slot1 auf Min innerhalb der struct schreiben
+				lp->second = slot2; //slot2 auf Sek innerhalb der struct schreiben
+			}else //Wenn nicht 6 Felder dann auf 8 Felder Werte prüfen
+			{
+				slot3 = atoi(strTime+6); //dritter Slot als Integer speichern
+				if(!((slot1 >= 0) && (slot1 <= 99)) || !((slot2 >= 0) && (slot2 <= 59)) || !((slot3 >= 0) && (slot3 <= 59)))
+					return 1;
+				lp->hour = slot1; //slot1 auf Std innerhalb der struct schreiben
+				lp->minute = slot2; //slot2 auf Min innerhalb der struct schreiben
+				lp->second = slot3; //slot3 auf Sek innerhalb der struct schreiben
+			}
+		}else
 		{
 			return 1;
 		}
-		else
-		{
-			return 0;
-		}
-	}
-	//Kontrolle der string eingabe
-	if(truth == 1)
+	}else
 	{
-		if(strchr(strTime,':'))
-		{
-			for(i = 0; i < strlen(strTime); i++) //while(*(strTime + i))
-			{
-				if(((*(strTime + i) < '0') || (*(strTime + i) > '9' )) && (*(strTime + i) != ':'))
-				{
-					return 0;
-					i++;
-				}
-				if(((*(strTime + i) >= '0') && (*(strTime + i) <= '9' )))
-				{
-					return 1;
-					i++;
-				}
-			}
-		}
+		return 1;
 	}
 }
+
 void printTime(TTime * lp)
 {
 	//Ausgabe der Zeit
-	printf("%02i:%02i:%02i", lp->hour, lp->minute , lp->second );
-
+	if((lp->hour) == 0)
+	{
+		printf("%02i:%02i", lp->minute , lp->second );
+	}else{
+		printf("%02i:%02i:%02i", lp->hour, lp->minute , lp->second );
+	}
 }
