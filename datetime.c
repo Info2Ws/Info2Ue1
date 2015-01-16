@@ -26,7 +26,7 @@ void getTime(char * Text, TTime * lp)
 
 int convertStringToTime(char * strTime , TTime * lp)
 {
-	len = strlen(strTime);
+	int len = strlen(strTime);
 	int slot1, slot2, slot3;
 	/*Formatprüfung*/
 	if((len == 8) || (len == 5)) //Formatlänge hh:mm:ss oder mm:ss 
