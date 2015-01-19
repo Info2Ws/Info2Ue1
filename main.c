@@ -20,8 +20,14 @@
 #include "database.h"
 #include "sort.h"
 
+//TMedia Medias[MAXMEDIA];
+TMedia *Medias;
+
 int main()
 {
+    
+    Medias = (TMedia*)(calloc(MAXMEDIA+1, sizeof(TMedia)));
+
     char * menutitle = "Medien-Verwaltung Deluxe";      //wir brauchen einen besseren namen..
     char * menu[9] = {"1. Neues Medium anlegen", "2. Medium bearbeiten", 
 	"3. Medium loeschen", "4. nach Tracks suchen", "5. Tracks sortieren", 

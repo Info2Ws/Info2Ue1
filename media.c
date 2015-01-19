@@ -4,7 +4,9 @@
 #include "media.h"
 
 int MediaCounter = 0;
-TMedia Medias[MAXMEDIA];
+//TMedia Medias[MAXMEDIA];
+//TMedia *Medias = &Media[0];
+//TODO: put in freeList
 
 
 /**********************************************************
@@ -14,7 +16,9 @@ TMedia Medias[MAXMEDIA];
  *********************************************************/
 void createMedia()
 {
-	TMedia * M = Medias + MediaCounter;
+    int i;
+	TMedia *M = Medias + MediaCounter;
+    TTrack *T;                      //pointer for actual track 
 
 	//Menütitel
     printf("Erfassung eines neuen Mediums\n");
@@ -32,19 +36,18 @@ void createMedia()
 
 	
     //Erstellung der einzelnen Tracks
-	printf("Geben Sie bitte die Daten der einzelnen Tracks ein:\n\n");    
-	do
-	{
-		if((createTrack(M->Tracks + M->Totalnumber, M->interpret)) == NULL){
-			(M->Totalnumber)++;
-			((M->Tracks + M->Totalnumber - 1)->Tracknr) = M->Totalnumber;
-		}
-		else
-		{
-			break;
-		}
-    }while((askAgain()) && (M->Totalnumber < MAXTRACKS));
+	printf("Geben Sie bitte die Daten der einzelnen Tracks ein:\n\n");
 
+    for(i = 0; i < MAXTRACKS; i++)
+    {
+        T = (M->Tracks) + i; 
+        createTrack(T, M->interpret);
+        T->Tracknr = i + 1; 
+        M->Totalnumber = i + 1;
+
+        if(!askAgain())
+            break;
+    }
 	//Naechstes Medium
 	MediaCounter++;
 }

@@ -28,6 +28,8 @@ int convertStringToTime(char * strTime , TTime * lp)
 {
 	int len = strlen(strTime);
 	int slot1, slot2, slot3;
+    
+    //lp = (TTime *)(malloc(sizeof(TTime)));
 	/*Formatprüfung*/
 	if((len == 8) || (len == 6)) //Formatlänge hh:mm:ss oder mm:ss 
 	{

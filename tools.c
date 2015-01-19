@@ -145,6 +145,8 @@ int getText(char *prompt, int plength, int allowempty, char **input)
                     {
                         strcpy(*input, tempinput);
                         free(tempinput);
+                        //TODO: save pointer (*input) in a free-list, which will 
+                        //      be used, when the programm will end
                         return 1;
                     }
                     else

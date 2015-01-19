@@ -24,7 +24,7 @@ typedef struct
 	unsigned int Tracknr;
 	char *title;//pointer auf titel
 	char *interpret;//pointer auf interpret
-	TTime  *lp;//lengthpointer
+	TTime lp;//lengthpointer    FIXED BUG: May be not a pointer!!!
 }TTrack; 
 	
 typedef struct
@@ -38,6 +38,7 @@ typedef struct
 }TMedia;
 	
 extern int MediaCounter;
-extern TMedia Medias[];
+//extern TMedia Medias[];
+extern TMedia *Medias;
 
 #endif

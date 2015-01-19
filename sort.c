@@ -146,7 +146,7 @@
  **********************************************************/ 
 int cmpTracknr(TTrack *t1, TTrack *t2)
 {
-    return t1->Tracknr - t2->Tracknr;
+    return (t1->Tracknr) - (t2->Tracknr);
 }
 
 /**********************************************************
@@ -162,8 +162,8 @@ int cmpTracknr(TTrack *t1, TTrack *t2)
 int cmpTitle(TTrack *t1, TTrack *t2)
 {
     //vorsicht, adressoperator ????
-    char *str1 = t1->title;
-    char *str2 = t2->title;
+    char *str1 = &(t1->title);
+    char *str2 = &(t2->title);
     int i = 0;
 
     //work, as string1 and 2 are not at end
@@ -190,15 +190,19 @@ int cmpTitle(TTrack *t1, TTrack *t2)
 int cmpInterpret(TTrack *t1, TTrack *t2)
 {
 
-    char *str1 = t1->interpret;
-    char *str2 = t2->interpret;
+    char *str1 = &(t1->interpret);
+    char *str2 = &(t2->interpret);
     int i = 0;
 
     //verhalten, wenn track interpret leer???
-    if(*str1 == NULL)
-        *str1 = 0;
-    if(*str2 == NULL)
-        *str2 = 0;
+    //if(*str1 == NULL)
+    //    *str1 = 0;
+    //if(*str2 == NULL)
+    //    *str2 = 0;
+    if(*str1 == NULL && *str2 == NULL)
+    {
+        return 0;
+    }
 
     //work, as string 1 and 2 are not at end
     while((*(str1 + i) != '\0' && (*str2 + i) != '\0'))
@@ -225,8 +229,8 @@ int cmpDuration(TTrack *t1, TTrack *t2)
 {
     //make pointer on time structures
     //adressop???
-    TTime *lp1 = (t1->lp);
-    TTime *lp2 = (t2->lp);
+    TTime *lp1 = &(t1->lp);
+    TTime *lp2 = &(t2->lp);
 
     //add hour minutes and seconds in a long number
     long duration1 = ((lp1->hour) * 60 * 60) + ((lp1->minute) * 60) + (lp1->second);
