@@ -7,7 +7,7 @@
 *-----------------------------------------------------
 * ERSTELLT VON: 
 *           AM: 19.10.2014
-* ÄNDERUNGEN  : 12.12.2014
+* ÄNDERUNGEN  : 21.01.2015 PS
 ******************************************************/
 
 #include <stdio.h>
@@ -26,7 +26,7 @@ TMedia *Medias;
 int main()
 {
     
-    Medias = (TMedia*)(calloc(MAXMEDIA+1, sizeof(TMedia)));
+    Medias = (TMedia*)(calloc(MAXMEDIA+1, sizeof(TMedia))); //TO DO: Auf NULL initialisieren
 
     char * menutitle = "Medien-Verwaltung Deluxe";      //wir brauchen einen besseren namen..
     char * menu[9] = {"1. Neues Medium anlegen", "2. Medium bearbeiten", 

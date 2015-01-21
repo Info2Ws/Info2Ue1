@@ -10,11 +10,11 @@
 void createMedia();
 void editMedia();
 void deleteMedia();
-int createTrack(TTrack * pT, int wI);
+int createTrack(TTrack * pT, char * wI);
 void searchTrack();
 void sortTracks();
 void listMedia();
 void listOneMedia(int Mediennr);
-void listOneTrack(int Mediennr, unsigned int Totalnumber);
+void listOneTrack(TMedia * M, int Tracknum);
 
 #endif

@@ -25,22 +25,25 @@
 /**********************************************************
  * FUNCTION:        loadMedia 
  * --------------------------------------------------------
- * DESCRIPTION:     will load all saved media from file
+ * DESCRIPTION:     checks for existing database, damaged
+ *					data and will load all saved media data
+ *					from file
  * STATUS:          
+ * LAST EDIT:		21.01.2015 PS
  **********************************************************/ 
  int loadMedia()
  {
 	FILE *data;
     char *text;
-    void *dataField;
-    void *MediaField;
-    void *dataEnd = NULL;
+    void *dataField;  //Pointer auf den Anfang des Datensatzes
+    void *MediaField;  //Pointer auf den Anfang der Medien
+    void *dataEnd = NULL;  //Pointer auf das Ende des Datensatzes
 
     /* Check beim Öffnen der Datei, ob erfolgreich) */
     if((data = fopen("database.dat", "r")) == NULL)
     {
         fprintf(stderr, "FEHLER: Datei konnte nicht geöffnet werden!\n");
-        return 0;
+        return 1;
     }
 
     /* Pointer auf <Data> */
@@ -53,7 +56,7 @@
     if (dataField == NULL)
     {
         fprintf(stderr, "FEHLER: Datenbank fehlerhaft!\n");
-        return 0;
+        return 1;
     }
     while (dataEnd == NULL)
     {
@@ -69,14 +72,14 @@
     }
     fclose(data);
     printf("Datenbank erfolgreich geladen.\n");
-    return 1;
+    return 0;
  }
-
  /**********************************************************
  * FUNCTION:        loadOneMedia 
  * --------------------------------------------------------
  * DESCRIPTION:     will load one media from file
  * STATUS:          
+ * LAST EDIT:		21.01.2015 PS
  **********************************************************/
  void loadOneMedia(FILE * data)
  {
@@ -132,12 +135,12 @@
     }
     MediaCounter++;
  }
- 
 /**********************************************************
  * FUNCTION:        loadOneTrack 
  * --------------------------------------------------------
  * DESCRIPTION:     will load one Track from file
  * STATUS:          
+ * LAST EDIT:		21.01.2015 PS
  **********************************************************/
  void loadOneTrack(FILE * data, int TrackNr)
  {
@@ -148,11 +151,19 @@
     int len;
     TTrack * Tp = ((Medias + MediaCounter)->Tracks)+TrackNr;
     
-
     while (!TrackEnd)
     {
         line = calloc(256, sizeof(char));
         fgets(line, 255, data);
+        if ((matchTag = strstr(line, "<Tracknr>")))
+        {
+            len = strlen(line);
+            line[len - 11] = '\0';
+            text = (char *) matchTag;
+            text += 9;
+            (Tp->Tracknr) = (unsigned int) calloc(len - 19, sizeof(unsigned int));
+            (Tp->Tracknr) = (unsigned int) atoi(text);
+        }
         if ((matchTag = strstr(line, "<Title>")))
         {
             len = strlen(line);
@@ -172,7 +183,6 @@
             strcpy((Tp->interpret) , text);
 
         }
-
         if (matchTag = strstr(line, "<Duration>"))
         {
             len = strlen(line);
@@ -189,8 +199,6 @@
         }
         free(line);
     }
-
-    return 1;
  }
 
  

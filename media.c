@@ -12,13 +12,16 @@ int MediaCounter = 0;
 /**********************************************************
  * FUNCTION:        createMedia 
  * --------------------------------------------------------
- * DESCRIPTION:
+ * DESCRIPTION:		Creates an Interface to enter Media 
+ * 					related data (title, interpret, Type, 
+ *					Releasedate)
+ * LAST EDIT:		21.01.2015 PS
  *********************************************************/
 void createMedia()
 {
     int i;
-	TMedia *M = Medias + MediaCounter;
-    TTrack *T;                      //pointer for actual track 
+	TMedia * M = Medias + MediaCounter;
+    TTrack * T;                      //pointer for actual track 
 
 	//Menütitel
     printf("Erfassung eines neuen Mediums\n");
@@ -72,21 +75,19 @@ void deleteMedia()
 /**********************************************************
  * FUNCTION:        createTrack 
  * --------------------------------------------------------
- * DESCRIPTION: Creates a Track (tracknr, title, interpret, 
- * 				track length)
+ * DESCRIPTION: 	Creates a Track (tracknr, title, interpret, 
+ * 					track length)
+ * LAST EDIT:		21.01.2015 PS
  *********************************************************/
  
-int createTrack(TTrack *pT, int wI)
+int createTrack(TTrack *pT, char * wI)
 {
-	// Abfrage der Trackinformationen	
-	printf("Track %i\n\n\n", pT->Tracknr);
-    
 	getText("Geben Sie bitte den Titel des Tracks an: ", 50 , 0 , &(pT->title));
         if(!wI) //Falls Medium-Interpret leer -> Einzelne Interpreten abfragen
         {
             getText("Geben Sie bitte den Interpreten an: " , 50 , 0 , &(pT->interpret));
         }
-        getTime("Geben Sie bitte die Dauer des Tracks ein\n(Format hh:mm:ss oder mm:ss) : ", &(pT->lp));
+        getTime("Geben Sie bitte die Dauer des Tracks ein\n(Format hh:mm:ss oder mm:ss): ", &(pT->lp));
 
 	return 0;
 }
@@ -129,13 +130,15 @@ void sortTracks()
 /**********************************************************
  * FUNCTION:        listMedia 
  * --------------------------------------------------------
- * DESCRIPTION:
+ * DESCRIPTION:		Creates Menuetitle and checks if there
+ *					is at least 1 Media
+ * LAST EDIT:		21.01.2015 PS
  *********************************************************/
 void listMedia()
 {
     int i = 0;//Laufvariable
 
-    //Ausgabe der Ueberschrift
+    //Ausgabe des Menuetitels
     printf("Liste der Medien\n");
     printLine('-' , 16);
     printf("\n\n");
@@ -146,55 +149,63 @@ void listMedia()
     }
 	else
 	{
-    	//Ausgabe aller Medien
+    	//Auflistung aller Medien
     	for(i = 0 ; i < MediaCounter ; i++)
     	{
     	    listOneMedia(i);
     	}
 	}
 }
-
+/**********************************************************
+ * FUNCTION:        listMedia 
+ * --------------------------------------------------------
+ * DESCRIPTION:		Listing Mediainformations (title,
+ *					interpret, Releasedate, Totalnumber)
+ * LAST EDIT:		21.01.2015 PS
+ *********************************************************/
 void listOneMedia(int Mediennr)
-{
+{	
+	TMedia * M = Medias + Mediennr;
     int i = 0; //Laufvariable
 
-
     //Ausgabe der Medieninformationen
-    printf("Titel             : %s\n", Medias[Mediennr].title);
-    if(Medias[Mediennr].interpret != NULL)
+    printf("Titel             : %s\n", M->title);
+    if(M->interpret != NULL)
     {
-        printf("Interpret         : %s\n", Medias[Mediennr].interpret);
+        printf("Interpret         : %s\n", M->interpret);
     }
-    printf("Erscheinungsjahr  : %i\n", Medias[Mediennr].Releasedate);
-    printf("Anzahl der Tracks : %i\n", Medias[Mediennr].Totalnumber);
+	// TO DO: Ausgabe des Medientyps
+    printf("Erscheinungsjahr  : %i\n", M->Releasedate);
+    printf("Anzahl der Tracks : %i\n", M->Totalnumber);
 
-    //Auflistung der einzelnen Tracks
-    listOneTrack(Mediennr, Medias[Mediennr].Totalnumber);
+    //Auflistung aller Tracks
+	printf("Tracks\n");
+	for(i = 0 ; i < (M->Totalnumber) ; i++)
+    	{
+    	    listOneTrack(M, i);
+    	}
     printf("\n");
-
 }
-
-void listOneTrack(int Mediennr, unsigned int Totalnumber)
+/**********************************************************
+ * FUNCTION:        listMedia 
+ * --------------------------------------------------------
+ * DESCRIPTION:		Listing Trackinformations (Tracknr, title,
+ *					interpret (if not in Media), lp)
+ * LAST EDIT:		21.01.2015 PS
+ *********************************************************/
+void listOneTrack(TMedia * M, int Tracknum)
 {
-    //Laufvariable
-    int i = 0;
+	/*Pointer auf den Anfang des Tracks-Arrays*/
+	 TTrack * T = M->Tracks;
 
     //Ausgabe der Informationen der einzelnen Tracks
-    printf("Tracks\n");
-    for( i = 0 ; i < (Totalnumber) ; i++ )
-    {
 
-        printf("%i. %s ",(i + 1), Medias[Mediennr].Tracks[i].title );
-        if(Medias[Mediennr].interpret == NULL)
+        printf("%u. %s ",(T+Tracknum)->Tracknr, (T+Tracknum)->title);
+        if(M->interpret == NULL) //Interpret listen wenn nicht in Media vorhanden
         {
-            printf("von %s ", Medias[Mediennr].Tracks[i].interpret);
+            printf("von %s ", (T+Tracknum)->interpret);
         }
         printf("( ");
-        printTime(&(Medias[Mediennr].Tracks[i].lp));
+        printTime(&((T+Tracknum)->lp));
         printf(" )\n");
-
-
-
-    }
-
 }

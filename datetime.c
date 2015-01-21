@@ -6,7 +6,13 @@
 #include"tools.h"
 #include<ctype.h> //wegen isdigit
 
-
+/**********************************************************
+ * FUNCTION:        getTime 
+ * --------------------------------------------------------
+ * DESCRIPTION:     reads time input
+ * STATUS:          
+ * LAST EDIT:		16.01.2015 PS
+ **********************************************************/
 void getTime(char * Text, TTime * lp)
 {
 	char strTime[9];
@@ -18,12 +24,19 @@ void getTime(char * Text, TTime * lp)
 		waitForEnter();
 		if(convertStringToTime(strTime, lp)) //evtl. Rückgabewert False = convert...
 		{
-			printf("Falsche Eingabe! Format beachten!");
+			printf("Falsche Eingabe! Format beachten!\n");
 			waitForEnter();
 		}
 	}while(convertStringToTime(strTime, lp));
 }
-
+/**********************************************************
+ * FUNCTION:        convertStringToTime
+ * --------------------------------------------------------
+ * DESCRIPTION:     checks time format and writes time data
+ *					into "Medias.Tracks.lp"
+ * STATUS:          
+ * LAST EDIT:		16.01.2015 PS
+ **********************************************************/
 int convertStringToTime(char * strTime , TTime * lp)
 {
 	int len = strlen(strTime);
@@ -68,7 +81,13 @@ int convertStringToTime(char * strTime , TTime * lp)
 		return 1;
 	}
 }
-
+/**********************************************************
+ * FUNCTION:        printTime
+ * --------------------------------------------------------
+ * DESCRIPTION:     prints time in 2 different formats
+ * STATUS:          
+ * LAST EDIT:		
+ **********************************************************/
 void printTime(TTime * lp)
 {
 	//Ausgabe der Zeit
