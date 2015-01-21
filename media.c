@@ -189,6 +189,7 @@ void listOneTrack(int Mediennr, unsigned int Totalnumber)
         {
             printf("von %s ", Medias[Mediennr].Tracks[i].interpret);
         }
+        printf("( ");
         printTime(&(Medias[Mediennr].Tracks[i].lp));
         printf(" )\n");
 

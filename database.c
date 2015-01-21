@@ -98,10 +98,6 @@
             text = (char *) matchTag;
             text += 11;
             (Medias + MediaCounter)->interpret = calloc(len - 23, sizeof(char));
-            //if (strlen(text) == 0)
-            //    (Media + MediaCounter)->boolSameInterpret = 0;
-            //else
-            //    (Media + MediaCounter)->boolSameInterpret = 1;
             strcpy((Medias + MediaCounter)->interpret, text);
         }
         if (matchTag = strstr(line, "<Title>"))
@@ -150,6 +146,8 @@
     void * matchTag;
     int TrackEnd = 0;
     int len;
+    int * Tp = ((Medias + MediaCounter)->Tracks)+TrackNr;
+    
 
     while (!TrackEnd)
     {
@@ -161,8 +159,8 @@
             line[len - 9] = '\0';
             text = (char *) matchTag;
             text += 7;
-            (Medias + MediaCounter)->Tracks[TrackNr].title = calloc(len - 16, sizeof(char));
-            strcpy((Medias + MediaCounter)->Tracks[TrackNr].title, text);
+            (Tp->title) = calloc(len - 16, sizeof(char));
+            strcpy((Tp->title), text);
         }
         if (matchTag = strstr(line, "<Interpret>"))
         {
@@ -170,8 +168,8 @@
             line[len - 13] = '\0';
             text = (char *) matchTag;
             text += 11;
-            (Medias + MediaCounter)->Tracks[TrackNr].interpret = calloc(len - 16, sizeof(char));
-            strcpy((Medias + MediaCounter)->Tracks[TrackNr].interpret , text);
+            (Tp->interpret) = calloc(len - 16, sizeof(char));
+            strcpy((Tp->interpret) , text);
 
         }
 
@@ -182,9 +180,7 @@
             line[len - 12] = '\0';
             text = (char *) matchTag;
             text += 10;
-
-            //convertStringToTime(&((Media + MediaCounter)->Tracks[TrackNr].lp), text);
-
+            convertStringToTime(text, &(Tp->lp));
         }
 
         if (matchTag = strstr(line, "</Track>"))
