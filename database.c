@@ -146,7 +146,7 @@
     void * matchTag;
     int TrackEnd = 0;
     int len;
-    int * Tp = ((Medias + MediaCounter)->Tracks)+TrackNr;
+    TTrack * Tp = ((Medias + MediaCounter)->Tracks)+TrackNr;
     
 
     while (!TrackEnd)
