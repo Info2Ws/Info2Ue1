@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define MAXTRACKS  20
-#define MAXMEDIA 20
+#define MAXTRACKS  30
+#define MAXMEDIA 30
 
 typedef struct
 {

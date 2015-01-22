@@ -100,21 +100,17 @@
  {
      int i = ui, j = oi;
      int icmpresult, jcmpresult;
-     TTrack temp;
-     //int border = *(data + ui);
+     TTrack temp = {0};
+     //border is first element at beginning
      TTrack *border = data + ui;
 
      while(i <= j)
      {
-         icmpresult = cmp(data + i, border);
-         jcmpresult = cmp(data + j, border);
          //search next element bigger than border
-            //OLD//while((i <= j) && (*(data + i) <= border))
-         while((i <= j) && (icmpresult <= 0))
+         while((i <= j) && ((cmp(data + i, border)) <= 0))
              i++;
          //search next element smaller than border
-            //OLD//while((j >= i) && (*(data + j) >= border))
-         while((j >= i) && (jcmpresult > 0))
+         while((j >= i) && ((cmp(data + j, border)) > 0))
              j--;
          //if the indices havent met
          if(i < j)
@@ -161,13 +157,13 @@ int cmpTracknr(TTrack *t1, TTrack *t2)
  **********************************************************/ 
 int cmpTitle(TTrack *t1, TTrack *t2)
 {
-    //vorsicht, adressoperator ????
-    char *str1 = &(t1->title);
-    char *str2 = &(t2->title);
+    //get chars only
+    char *str1 = (t1->title);
+    char *str2 = (t2->title);
     int i = 0;
 
-    //work, as string1 and 2 are not at end
-    while((*(str1 + i) != '\0' && (*str2 + i) != '\0'))
+    //read and compare chars, as string1 and 2 are not at end
+    while((*(str1 + i) != '\0' && (*(str2 + i)) != '\0'))
     {
         if(*(str1 + i) < *(str2 + i))
             return *(str1 + i) - *(str2 + i);
@@ -190,22 +186,24 @@ int cmpTitle(TTrack *t1, TTrack *t2)
 int cmpInterpret(TTrack *t1, TTrack *t2)
 {
 
-    char *str1 = &(t1->interpret);
-    char *str2 = &(t2->interpret);
+    //get chars only
+    char *str1 = (t1->interpret);
+    char *str2 = (t2->interpret);
     int i = 0;
 
-    //verhalten, wenn track interpret leer???
-    //if(*str1 == NULL)
-    //    *str1 = 0;
-    //if(*str2 == NULL)
-    //    *str2 = 0;
-    if(*str1 == NULL && *str2 == NULL)
+    //if adress of both interprets is NULL return 0
+    if((str1 == '\0') && (str2 == '\0'))
     {
         return 0;
     }
+    //if adress of one is NULL: change value of that str to \0
+    if(str1 == NULL)
+        *str1 = '\0';
+    if(str2 == NULL)
+        *str2 = '\0';
 
-    //work, as string 1 and 2 are not at end
-    while((*(str1 + i) != '\0' && (*str2 + i) != '\0'))
+    //read and compare chars, as string1 and 2 are not at end
+    while((*(str1 + i) != '\0' && (*(str2 + i)) != '\0'))
     {
         if(*(str1 + i) < *(str2 + i))
             return *(str1 + i) - *(str2 + i);
@@ -232,10 +230,10 @@ int cmpDuration(TTrack *t1, TTrack *t2)
     TTime *lp1 = &(t1->lp);
     TTime *lp2 = &(t2->lp);
 
-    //add hour minutes and seconds in a long number
+    //sum up hour minutes and seconds in a long number
     long duration1 = ((lp1->hour) * 60 * 60) + ((lp1->minute) * 60) + (lp1->second);
     long duration2 = ((lp2->hour) * 60 * 60) + ((lp2->minute) * 60) + (lp2->second);
     
-    //cast value of return back to int
+    //cast value back to int before return
     return (int)(duration1 - duration2);
 }
