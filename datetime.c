@@ -25,7 +25,6 @@ void getTime(char * Text, TTime * lp)
 		if(convertStringToTime(strTime, lp)) //evtl. Rückgabewert False = convert...
 		{
 			printf("Falsche Eingabe! Format beachten!\n");
-			waitForEnter();
 		}
 	}while(convertStringToTime(strTime, lp));
 }
@@ -33,7 +32,7 @@ void getTime(char * Text, TTime * lp)
  * FUNCTION:        convertStringToTime
  * --------------------------------------------------------
  * DESCRIPTION:     checks time format and writes time data
- *					into "Medias.Tracks.lp"
+ *			into "Medias.Tracks.lp"
  * STATUS:          
  * LAST EDIT:		16.01.2015 PS
  **********************************************************/
@@ -62,7 +61,8 @@ int convertStringToTime(char * strTime , TTime * lp)
 				lp->minute = slot1; //slot1 auf Min innerhalb der struct schreiben
 				lp->second = slot2; //slot2 auf Sek innerhalb der struct schreiben
 				return 0;
-			}else //Wenn nicht 6 Felder dann auf 8 Felder Werte prüfen
+			}
+			else //Wenn nicht 6 Felder dann auf 8 Felder Werte prüfen
 			{
 				slot3 = atoi(strTime+6); //dritter Slot als Integer speichern
 				if(!((slot1 >= 0) && (slot1 <= 99)) || !((slot2 >= 0) && (slot2 <= 59)) || !((slot3 >= 0) && (slot3 <= 59)))

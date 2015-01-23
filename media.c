@@ -13,14 +13,14 @@ int MediaCounter = 0;
  * FUNCTION:        createMedia 
  * --------------------------------------------------------
  * DESCRIPTION:		Creates an Interface to enter Media 
- * 					related data (title, interpret, Type, 
- *					Releasedate)
+ * 			related data (title, interpret, Type, 
+ *			Releasedate)
  * LAST EDIT:		21.01.2015 PS
  *********************************************************/
 void createMedia()
 {
     int i;
-	TMedia * M = Medias + MediaCounter;
+	TMedia * M = Medias;
     TTrack * T;                      //pointer for actual track 
 
 	//Menütitel
@@ -124,7 +124,6 @@ void sortTracks()
                 case 4: kuhsort(Medias, 3); exit = 0; break; //Trackdauer
                 case 5: exit = 0;		break;
         }
-        waitForEnter();
     }while(exit);
 }
 /**********************************************************
@@ -147,14 +146,14 @@ void listMedia()
     {
         printf("Keine Medien vorhanden!\n");
     }
-	else
+    else
+    {
+	//Auflistung aller Medien
+	for(i = 0 ; i < MediaCounter ; i++)
 	{
-    	//Auflistung aller Medien
-    	for(i = 0 ; i < MediaCounter ; i++)
-    	{
-    	    listOneMedia(i);
-    	}
+		listOneMedia(i);
 	}
+    }
 }
 /**********************************************************
  * FUNCTION:        listMedia 
@@ -165,7 +164,7 @@ void listMedia()
  *********************************************************/
 void listOneMedia(int Mediennr)
 {	
-	TMedia * M = Medias + Mediennr;
+    TMedia * M = Medias + Mediennr;
     int i = 0; //Laufvariable
 
     //Ausgabe der Medieninformationen
@@ -174,16 +173,16 @@ void listOneMedia(int Mediennr)
     {
         printf("Interpret         : %s\n", M->interpret);
     }
-	// TO DO: Ausgabe des Medientyps
+    // TO DO: Ausgabe des Medientyps
     printf("Erscheinungsjahr  : %i\n", M->Releasedate);
     printf("Anzahl der Tracks : %i\n", M->Totalnumber);
 
     //Auflistung aller Tracks
-	printf("Tracks\n");
-	for(i = 0 ; i < (M->Totalnumber) ; i++)
-    	{
+    printf("Tracks\n");
+    for(i = 0 ; i < (M->Totalnumber) ; i++)
+    {
     	    listOneTrack(M, i);
-    	}
+    }
     printf("\n");
 }
 /**********************************************************

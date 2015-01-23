@@ -22,11 +22,13 @@
 
 //TMedia Medias[MAXMEDIA];
 TMedia *Medias;
+TMedia *First, *Last;
 
 int main()
 {
     
-    Medias = (TMedia*)(calloc(MAXMEDIA+1, sizeof(TMedia))); //TO DO: Auf NULL initialisieren
+    Medias = (TMedia*)(calloc(1, sizeof(TMedia))); //TO DO: Auf NULL initialisieren (ne, macht calloc...)
+    First = Last = NULL;
 
     char * menutitle = "Medien-Verwaltung Deluxe";      //wir brauchen einen besseren namen..
     char * menu[9] = {"1. Neues Medium anlegen", "2. Medium bearbeiten", 
@@ -38,7 +40,7 @@ int main()
 	loadMedia(); //Laden der Datenbank von Datei
 	
     do
-	{
+    {
         choice = getMenu(menutitle, menu, 9, 1); //Aufruf des Menüs
 
         switch(choice) //Ausgabe des Menüpunktes

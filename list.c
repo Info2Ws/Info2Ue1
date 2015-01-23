@@ -20,14 +20,14 @@ void appendInList(TMedia *eingabe)
 
 	if(Last == NULL)
 	{
-		if((Last=(TMedia *)(calloc(1, sizeof(TMedia))== NULL)
+		if((Last=(TMedia *)(calloc(1, sizeof(TMedia))))== NULL)
 		{
-			printf("Kauf dir mal mehr RAM!!\n")
+			printf("Kauf dir mal mehr RAM!!\n");
 			return;
 		}
 	}
 	if(First == NULL){
-		if((First =(struct medien *) malloc(sizeof(struct medien)))== bNULL)
+		if((First =(TMedia *)(calloc(1, sizeof(TMedia))))== NULL)
 		{
 			fprintf(stderr, "Konnte keinen Speicherplatz fuer das erste Element reservieren!\n");
 			return ;
@@ -41,16 +41,16 @@ void appendInList(TMedia *eingabe)
 	else
 	{
 		zeiger = First;
-		while(zeiger->next != NULL)
-			zeiger=zeiger->next;
-		if((zeiger->next = malloc(sizeof(struct medien))) == NULL)
+		while(zeiger->Next != NULL)
+			zeiger=zeiger->Next;
+		if((zeiger->Next = (calloc(1, sizeof(TMedia)))) == NULL)
 		{
 			fprintf(stderr,"Konnte keinen Speicherplatz fuer das letzte Element reservieren!\n");
 			return;
 		}
 		zeiger1 = zeiger;
 		zeiger = zeiger->Next;
-		*zeiger = *eingabe
+		*zeiger = *eingabe;
 		zeiger -> Next = NULL;
 	}
 }
@@ -64,7 +64,7 @@ void appendInList(TMedia *eingabe)
  *                  returns   0, if t1 = t2
  *                  returns > 0, if t1 > t2
  * STATUS:          
- **********************************************************/ 
+ ********************************************************** 
 int cmpMediaTitleAsc(TMedia *t1, TMedia *t2)
 {
 	//vorsicht, adressoperator ????
@@ -84,7 +84,7 @@ int cmpMediaTitleAsc(TMedia *t1, TMedia *t2)
 	return 0;
 }
 
-/**********************************************************
+**********************************************************
  * FUNCTION:        cmpMediaTitleDesc 
  * --------------------------------------------------------
  * DESCRIPTION:     compares two mediatitles
@@ -93,7 +93,7 @@ int cmpMediaTitleAsc(TMedia *t1, TMedia *t2)
  *                  returns   0, if t2 = t1
  *                  returns > 0, if t2 > t1
  * STATUS:          
- **********************************************************/
+ **********************************************************
 int cmpMediaTitle(TMedia *t1, TMedia *t2)
 {
 	//vorsicht, adressoperator ????
@@ -112,7 +112,7 @@ int cmpMediaTitle(TMedia *t1, TMedia *t2)
 	}
 	return 0;
 }
-
+*/
 /**********************************************************
  * FUNCTION:        insertInList
  * --------------------------------------------------------
@@ -123,53 +123,52 @@ int cmpMediaTitle(TMedia *t1, TMedia *t2)
 int insertInList(TMedia *eingabe)
 {
 	struct medien *zeiger,*zeiger1;
-	if(*eingabe == NULL)
+/*	if(*(eingabe) == NULL)
 	{
 
 		return 0;
-	}
+	} */
 	if(First == NULL)
 		appendInList(eingabe);
 	else
 	{
 		zeiger=First;
-		while(zeiger != NULL &&(strcmp(zeiger->title,Neu->title)<0))
+		while(zeiger != NULL &&(strcmp(zeiger->title,eingabe->title)<=0))
 			zeiger=zeiger->Next;
 		if(zeiger==NULL)
-			appendInList(eingabe)
+			appendInList(eingabe);
 			else if (zeiger == First)
 			{
-				First=(TMedia *)(calloc(1, sizeof(TMedia));
-				if(NULL == First)
+				First=(TMedia *)(calloc(1, sizeof(TMedia)));
+				if(First == NULL)
 				{
 					fprintf(stderr,"Kein Speicher zum alloziieren verfuegbar!\n");
 					return 0;
 				}
-				First->title=t;
-				First->interpret=i;
+				*First = *eingabe;
 				First->Next=zeiger;
 				First->Prev=NULL;
+            }
 				else
 				{
 					zeiger1=First;
 
 					while(zeiger1->Next != zeiger)
-						zeiger1=zeiger1->Next;
-					zeiger=(TMedia *)(calloc(1, sizeof(TMedia));
+						zeiger1=zeiger->Next;
+					zeiger=(TMedia *)(calloc(1, sizeof(TMedia)));
 					if(NULL == zeiger)
 					{
 						fprintf(stderr, "Kein Speicher zum alloziieren verfuegbar!\n");
-						return;
+						return 0;
 					}
 
-					zeiger->title=t;
-					zeiger->interpret=i;;
+                    *zeiger = *eingabe;
 					zeiger->Next=zeiger1->Next;
 					zeiger->Prev=zeiger1;
 					zeiger1->Next=zeiger;
 					zeiger1->Next->Prev=zeiger;
 				} 
-			}
+			
 	}
 }
 /**********************************************************
