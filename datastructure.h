@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define MAXTRACKS  30
-#define MAXMEDIA 30
+#define MAXTRACKS  20
+
 
 typedef struct
 {
@@ -16,7 +16,8 @@ typedef struct
 
 
 typedef enum
-{ CD, DVD, Blueray, Sonstiges
+{ 
+	CD, DVD, Blueray, Sonstiges
 }TMediatype;
 
 typedef struct
@@ -25,6 +26,7 @@ typedef struct
 	char *title;//pointer auf titel
 	char *interpret;//pointer auf interpret
 	TTime lp;//lengthpointer    FIXED BUG: May be not a pointer!!!
+	
 }TTrack; 
 	
 typedef struct
@@ -35,10 +37,11 @@ typedef struct
 	unsigned int Releasedate;
 	unsigned int Totalnumber;
     	TTrack Tracks[MAXTRACKS];
+	struct *Next, *Last;
 }TMedia;
 	
 extern int MediaCounter;
 //extern TMedia Medias[];
-extern TMedia *Medias;
+extern TMedia *First,*Last;
 
 #endif
