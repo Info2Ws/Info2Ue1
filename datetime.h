@@ -18,12 +18,13 @@
 *-----------------------------------------------------
 * ERSTELLT VON:
 *           AM: 22.10.2014
-* ÄNDERUNGEN  : 28.10.2014
+* ÄNDERUNGEN  : 16.01.2015
 ******************************************************/
 
 
 /** Funktions-Pototypen **/
 
+<<<<<<< HEAD
 
    void getTime(char * Text,TTime * lp);
     int convertStringToTime(char * strTime , TTime * lp);
@@ -31,5 +32,9 @@
     int checkTime(TTime * lp, int truth , char * strTime);
 
 
+=======
+    void getTime(char * Text, TTime * lp);
+    int convertStringToTime(char * strTime , TTime * lp);
+	void printTime(TTime * lp);
+>>>>>>> origin/master
 #endif
-

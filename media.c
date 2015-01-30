@@ -3,6 +3,13 @@
 #include <string.h>
 #include "media.h"
 
+<<<<<<< HEAD
+=======
+int MediaCounter = 0;
+//TMedia Medias[MAXMEDIA];
+//TMedia *Medias = &Media[0];
+//TODO: put in freeList
+>>>>>>> origin/master
 
 int MediaCounter = 0;
 THashElement MediaIndex[MAXINDEX];
@@ -19,14 +26,23 @@ TMedia *Prev = NULL;
  *********************************************************/
 void createMedia(TMedia *mpoint)
 {
+<<<<<<< HEAD
     char userselection[5];
     int choice=0;
     clearscreen();
+=======
+    int i;
+	TMedia * M = Medias;
+    TTrack * T;                      //pointer for actual track 
+
+	//MenÃ¼titel
+>>>>>>> origin/master
     printf("Erfassung eines neuen Mediums\n");
     printLine('-' , 29);
     printf("\n\n");
     printf("Medium waehlen:\n1. CD\n2. DVD\n3. Blueray\n4. Sonstiges\n5. Zurueck\n"
 
+<<<<<<< HEAD
     	    
     	    
     do
@@ -50,10 +66,19 @@ void createMedia(TMedia *mpoint)
    
     getText("Geben Sie bitte den Titel ein: ", 50 , 0 , &mpoint->mTitle));
     getText("Geben Sie bitte den Interpreten ein\n(Bei mehreren Interpreten Feld leer lassen):", 50 , 1 , &mpoint->mInterpret);
+=======
+    //Eingaben
+    getText("Geben Sie bitte den Titel ein: ", 50 , 0 , &(M->title));
+    getText("Geben Sie bitte den Interpreten ein\n(Bei mehreren Interpreten Feld leer lassen):", 
+	50 , 1 , &(M->interpret));
+    //getText("Geben Sie bitte den Typ ein: ", 50 , 0 , &(M->Type));
+    getNumber("Geben Sie bitte den Medientyp ein:\n1: CD\n2: DVD\n3: Blueray\n4: Sonstiges\n", &(M->Type), 1 , 4);
+>>>>>>> origin/master
     getNumber("Geben Sie bitte das Erscheinungsjahr ein: ", &(M->Releasedate), 1950 , 2099);
     M->Totalnumber = 0;
 
 	
+<<<<<<< HEAD
     printf("\n");
     waitForEnter();
     clearScreen();
@@ -93,6 +118,23 @@ void createTrack(TMedia *mpoint) {
         }
     } while(schleife==1);
     mpoint->MediaNr = TrackNr;
+=======
+    //Erstellung der einzelnen Tracks
+	printf("Geben Sie bitte die Daten der einzelnen Tracks ein:\n\n");
+
+    for(i = 0; i < MAXTRACKS; i++)
+    {
+        T = (M->Tracks) + i; 
+        createTrack(T, M->interpret);
+        T->Tracknr = i + 1; 
+        M->Totalnumber = i + 1;
+
+        if(!askAgain())
+            break;
+    }
+	//Naechstes Medium
+	MediaCounter++;
+>>>>>>> origin/master
 }
 
 /**********************************************************
@@ -240,9 +282,15 @@ void sortTracks()
 /**********************************************************
  * FUNCTION:        listMedia check
  * --------------------------------------------------------
+<<<<<<< HEAD
  * DESCRIPTION:		Sorts Media naow
  *					
  * LAST EDIT:		21.01.2015 PN
+=======
+ * DESCRIPTION:		Creates Menuetitle and checks if there
+ *					is at least 1 Media
+ * LAST EDIT:		21.01.2015 PS
+>>>>>>> origin/master
  *********************************************************/
 void listMedia()
 {
@@ -254,6 +302,7 @@ void listMedia()
                     };
     TMedia *data = First;
 
+<<<<<<< HEAD
     if(First==NULL) { /* Medien vorhanden? */
         printf("Keine Medien zum Ausgeben vorhanden.\n");
         waitForEnter();
@@ -263,6 +312,9 @@ void listMedia()
     if(ascordesc==3) /* Hauptmenü */
         return;
     clearScreen();
+=======
+    //Ausgabe des Menuetitels
+>>>>>>> origin/master
     printf("Liste der Medien\n");
     sortListbyMedia(data, data->Next); /* Medien Sortieren */
     if(ascordesc==1) { /* Aufwärts */
@@ -278,6 +330,7 @@ void listMedia()
         }
 
     }
+<<<<<<< HEAD
     waitForEnter();
 }
 /**********************************************************
@@ -343,4 +396,67 @@ void listIndex() {
     printf("\n");
     waitForEnter();
     return;
+=======
+    else
+    {
+	//Auflistung aller Medien
+	for(i = 0 ; i < MediaCounter ; i++)
+	{
+		listOneMedia(i);
+	}
+    }
+}
+/**********************************************************
+ * FUNCTION:        listMedia 
+ * --------------------------------------------------------
+ * DESCRIPTION:		Listing Mediainformations (title,
+ *					interpret, Releasedate, Totalnumber)
+ * LAST EDIT:		21.01.2015 PS
+ *********************************************************/
+void listOneMedia(int Mediennr)
+{	
+    TMedia * M = Medias + Mediennr;
+    int i = 0; //Laufvariable
+
+    //Ausgabe der Medieninformationen
+    printf("Titel             : %s\n", M->title);
+    if(M->interpret != NULL)
+    {
+        printf("Interpret         : %s\n", M->interpret);
+    }
+    // TO DO: Ausgabe des Medientyps
+    printf("Erscheinungsjahr  : %i\n", M->Releasedate);
+    printf("Anzahl der Tracks : %i\n", M->Totalnumber);
+
+    //Auflistung aller Tracks
+    printf("Tracks\n");
+    for(i = 0 ; i < (M->Totalnumber) ; i++)
+    {
+    	    listOneTrack(M, i);
+    }
+    printf("\n");
+}
+/**********************************************************
+ * FUNCTION:        listMedia 
+ * --------------------------------------------------------
+ * DESCRIPTION:		Listing Trackinformations (Tracknr, title,
+ *					interpret (if not in Media), lp)
+ * LAST EDIT:		21.01.2015 PS
+ *********************************************************/
+void listOneTrack(TMedia * M, int Tracknum)
+{
+	/*Pointer auf den Anfang des Tracks-Arrays*/
+	 TTrack * T = M->Tracks;
+
+    //Ausgabe der Informationen der einzelnen Tracks
+
+        printf("%u. %s ",(T+Tracknum)->Tracknr, (T+Tracknum)->title);
+        if(M->interpret == NULL) //Interpret listen wenn nicht in Media vorhanden
+        {
+            printf("von %s ", (T+Tracknum)->interpret);
+        }
+        printf("( ");
+        printTime(&((T+Tracknum)->lp));
+        printf(" )\n");
+>>>>>>> origin/master
 }
