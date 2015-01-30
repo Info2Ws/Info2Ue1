@@ -25,9 +25,11 @@
 /** Funktions-Pototypen **/
 
 
-    void getTime(char * Text, TTime * lp);
-    void convertStringToTime(char * strTime , TTime * lp);
+   void getTime(char * Text,TTime * lp);
+    int convertStringToTime(char * strTime , TTime * lp);
     void printTime(TTime * lp);
     int checkTime(TTime * lp, int truth , char * strTime);
+
+
 #endif
 

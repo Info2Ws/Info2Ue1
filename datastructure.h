@@ -4,15 +4,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define MAXTRACKS  20
-#define MAXMEDIA 20
+#define MAXTRACKS  30
+#define MAXINDEX 30
 
 typedef struct
 {
 	int hour;
 	int minute;
 	int second;
-}TTime; //neuer Typ TTime_t
+}TTime; 
 
 
 typedef enum
@@ -22,22 +22,39 @@ typedef enum
 typedef struct
 { 
 	unsigned int Tracknr;
-	char *title;//pointer auf titel
-	char *interpret;//pointer auf interpret
-	TTime  *lp;//lengthpointer
+	char * tTitle;//pointer auf titel
+	char * tInterpret;//pointer auf interpret
+	TTime lp;//lengthpointer    FIXED BUG: May be not a pointer!!!
 }TTrack; 
 	
-typedef struct
+typedef struct medien
 {
-	char *title;
-	char *interpret;
-	TMediatype *Type;
+	int Index;
+	int mnumber;
+	char * mTitle;
+	char * mInterpret;
+	TMediatype mType;
 	unsigned int Releasedate;
 	unsigned int Totalnumber;
-    	TTrack Tracks[MAXTRACKS];
+   	TTrack Tracks[MAXTRACKS];
+     struct medien *Prev, *Next;
 }TMedia;
 	
+typedef struct listcontent
+{
+	TMedia *mpoint;
+	TTrack *tpoint;
+	struct listcontent *Next;
+}TlistElement;
+
+typedef struct Hash
+{
+	TListElement *FirstList;
+	TListElement *LastList;
+}THashElement
+
 extern int MediaCounter;
-extern TMedia Medias[];
+extern TMedia *First, *Last;
+extern THashs MediaIndex[MaxIndex];
 
 #endif

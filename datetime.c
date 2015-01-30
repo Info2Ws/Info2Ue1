@@ -28,14 +28,6 @@ void getTime(char * Text,TTime * lp)
     {
         //Eingabeaufforderung
         printf("%s", Text);
-<<<<<<< HEAD
-=======
-
-        //lp->minute  = atoi(NULL); //erzeugt Speicherzugriffsfehler
-        //lp->second = atoi(NULL);
-        //lp->hour  = atoi(NULL);
-
->>>>>>> eb0ace1ef0c5e351c40a7d1754b2b79b0829fb08
         //Eingabe des Benutzers
         fgets(strTime,9,stdin);
         clearBuffer();
@@ -49,7 +41,7 @@ void getTime(char * Text,TTime * lp)
         printf("%04i",checkZeit);//0000
         if(!checkZeit2)
         {
-            sprintf("Falsche Eingabe! Format (hh:mm:ss oder mm:ss) \n Fortfahren mit Enter");
+            printf("Falsche Eingabe! Format (hh:mm:ss oder mm:ss) \n Fortfahren mit Enter");
             clearBuffer();
         }
 
@@ -57,7 +49,7 @@ void getTime(char * Text,TTime * lp)
 
         if(!checkZeit)
         {
-            sprintf("Falsche Eingabe! Format (hh:mm:ss oder mm:ss)\n Fortfahren mit Enter");
+            printf("Falsche Eingabe! Format (hh:mm:ss oder mm:ss)\n Fortfahren mit Enter");
             clearBuffer();
         }
 
@@ -67,7 +59,7 @@ void getTime(char * Text,TTime * lp)
 
 }
 
-void convertStringToTime(char * strTime , TTime * lp)
+int convertStringToTime(char * strTime , TTime * lp)
 {
 
     //Zeiger deklaration
@@ -75,7 +67,7 @@ void convertStringToTime(char * strTime , TTime * lp)
     char * pMin         = NULL ;
 
     len=strlen(strTime);
-    if (isdigit(*strTime) && len > 2 )
+    if (isdigit(*strTime) && len <9 )
     {
         pStd = &strTime[0];
         Std = atoi(pStd);
@@ -111,6 +103,7 @@ void convertStringToTime(char * strTime , TTime * lp)
             lp->second = Sek;
 
     }
+    return;
 }
 int checkTime(TTime * lp ,int truth, char * strTime)
 {
@@ -120,7 +113,7 @@ int checkTime(TTime * lp ,int truth, char * strTime)
     if(truth == 0)
     {
 
-        if((lp->second < 60)||(lp->minute < 60 )||(lp->hour <99))
+        if(*(lp->second) < 60)&&(lp->minute < 60 )&&(lp->hour <99))
         {
 
             return 1;
@@ -136,7 +129,7 @@ int checkTime(TTime * lp ,int truth, char * strTime)
     //Kontrolle der string eingabe
     if(truth == 1)
     {
-        if(strrchr(strTime,':'))
+        if(strchr(strTime,':'))
         {
             while(*(strTime + i))
             {
@@ -156,12 +149,12 @@ int checkTime(TTime * lp ,int truth, char * strTime)
 
         }
     }
+    return;
 }
 
 void printTime(TTime * lp)
 {
     //Ausgabe der Zeit
     printf("%02i:%02i:%02i", lp->hour, lp->minute , lp->second );
-
+    return 0;
 }
-
