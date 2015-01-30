@@ -11,9 +11,69 @@
  *                  after userinput via stdin
  * STATUS:          
  **********************************************************/ 
+int insertInList(TMedia *Neu)
+{
+    TMedia *temp = First;
+    int cmpResult;
+    if(Neu == NULL)
+        return 0;
+
+    if(First == NULL)
+    {
+        //Fall1: Liste leer
+        Neu->Next = Neu->Prev = NULL;
+        First = Last = Neu;
+        return 1;
+    }
+    
+    cmpResult = cmpMediaTitleAsc(First, Neu); 
+
+    if(cmpResult > 0)
+    {
+        //Fall2: Vor dem ersten Element
+        Neu->Next = Neu->Prev = NULL;
+        First = Last = Neu;
+        return 1;
+    }
+    
+    if(cmpResult <= 0)
+    {
+        //Fall3: Nach dem Element
 
 
 
+    
+
+
+
+/**********************************************************
+ * FUNCTION:        cmpMediaTitleAsc 
+ * --------------------------------------------------------
+ * DESCRIPTION:     compares two mediatitles
+ *
+ *                  returns < 0, if t1 < t2 (eg a < b)
+ *                  returns   0, if t1 = t2
+ *                  returns > 0, if t1 > t2
+ * STATUS:          
+ **********************************************************/ 
+int cmpMediaTitleAsc(TMedia *t1, TMedia *t2)
+{
+	char *str1 = &(t1->title);
+	char *str2 = &(t2->title);
+	int i = 0;
+
+	//work, as string1 and 2 are not at end
+	while((*(str1 + i) != '\0'))
+	{
+		if(*(str1 + i) < *(str2 + i))
+			return *(str1 + i) - *(str2 + i);
+		else if(*(str1 + i) > *(str2 + i))
+			return *(str1 + i) - *(str2 + i);
+		i++;
+	}
+	return 0;
+}
+/*
 void appendInList(TMedia *eingabe)
 {
 	struct medien *zeiger, *zeiger1; //Zeiger auf einzelne Elemente der Struktur
@@ -26,6 +86,7 @@ void appendInList(TMedia *eingabe)
 			return;
 		}
 	}
+    //Fall1: Liste ist leer
 	if(First == NULL){
 		if((First =(TMedia *)(calloc(1, sizeof(TMedia))))== NULL)
 		{
@@ -33,11 +94,11 @@ void appendInList(TMedia *eingabe)
 			return ;
 		}
 		*First = *eingabe;		
-		First -> Next = NULL;
+		First -> Next = First->Prev = NULL;
 		Last = First;
-		Last -> Prev = NULL;
+		//Last -> Prev = First;
 	}
-
+    //Fall2: Liste ist nicht leer
 	else
 	{
 		zeiger = First;
@@ -48,12 +109,16 @@ void appendInList(TMedia *eingabe)
 			fprintf(stderr,"Konnte keinen Speicherplatz fuer das letzte Element reservieren!\n");
 			return;
 		}
-		zeiger1 = zeiger;
-		zeiger = zeiger->Next;
+		//zeiger1 = zeiger;
+		//zeiger = zeiger->Next;
 		*zeiger = *eingabe;
 		zeiger -> Next = NULL;
+        zeiger -> Prev = Last;
+        Last = zeiger;
+        //Last = Last->Next = zeiger; //
 	}
 }
+
 
 /**********************************************************
  * FUNCTION:        cmpMediaTitleAsc 
@@ -83,7 +148,6 @@ int cmpMediaTitleAsc(TMedia *t1, TMedia *t2)
 	}
 	return 0;
 }
-
 **********************************************************
  * FUNCTION:        cmpMediaTitleDesc 
  * --------------------------------------------------------
@@ -112,7 +176,7 @@ int cmpMediaTitle(TMedia *t1, TMedia *t2)
 	}
 	return 0;
 }
-*/
+
 /**********************************************************
  * FUNCTION:        insertInList
  * --------------------------------------------------------
@@ -120,57 +184,81 @@ int cmpMediaTitle(TMedia *t1, TMedia *t2)
  *                  after comparing the mediatitle
  * STATUS:          
  **********************************************************/ 
-int insertInList(TMedia *eingabe)
-{
-	struct medien *zeiger,*zeiger1;
-/*	if(*(eingabe) == NULL)
-	{
+    /*
+	struct medien *zeiger,*zeiger1, *tmp;
 
-		return 0;
-	} */
+    if(eingabe == NULL)
+    {
+        printf("\nÜbergebenes Element existiert nicht!\n");
+        return 0;
+    }
+    eingabe->Next = eingabe->Prev = NULL;
+    //Fall1: Liste ist leer
 	if(First == NULL)
-		appendInList(eingabe);
+    {
+        First = Last = eingabe;
+		//appendInList(eingabe);
+        return 1;
+    }
 	else
 	{
 		zeiger=First;
-		while(zeiger != NULL &&(strcmp(zeiger->title,eingabe->title)<=0))
-			zeiger=zeiger->Next;
-		if(zeiger==NULL)
-			appendInList(eingabe);
-			else if (zeiger == First)
-			{
-				First=(TMedia *)(calloc(1, sizeof(TMedia)));
-				if(First == NULL)
-				{
-					fprintf(stderr,"Kein Speicher zum alloziieren verfuegbar!\n");
-					return 0;
-				}
-				*First = *eingabe;
-				First->Next=zeiger;
-				First->Prev=NULL;
+    //Fall2: Vor dem ersten Element einfügen
+        if(strcmp(zeiger->title, eingabe->title) > 0)
+        {
+            zeiger = (TMedia *)(calloc(1, sizeof(TMedia)));
+            *zeiger = *First;           //Werte von First nach zeiger kopieren
+            zeiger->Next = First->Next; //zeiger->Next von First übernehmen
+            *First = *eingabe;          //Werte von eingabe nach First kopieren
+            First->Prev = NULL;         //Prev zeigt von First auf NULL
+            First->Next = zeiger;       //Next von First auf neuen zeiger
+            zeiger->Prev = First;       //Prev von zeiger auf First
+            //falls First = Last
+            if(First = Last)
+            {
+                Last = zeiger;
+                Last->Next = NULL;
             }
-				else
-				{
-					zeiger1=First;
+            return 1;
+        }
+		while(zeiger->Next != NULL &&(strcmp(zeiger->title,eingabe->title)<=0))
+			zeiger=zeiger->Next;
+    //Fall3: Hinten anfügen
+		if(zeiger == Last)
+        {
+             
+            zeiger = (TMedia *)(calloc(1, sizeof(TMedia)));
+            *zeiger = *Last;
+            zeiger->Prev = Last->Prev;
+            *Last = *eingabe;
+            Last->Next = NULL;
+            Last->Prev = zeiger;
+            zeiger->Next = Last;
+            return 1;
+        }
+     //Fall4: Dazwischen einfügen
+        else
+        {
+            zeiger1=First;
+            while((zeiger1->Next != zeiger)) // && (zeiger1 != zeiger))
+                zeiger1=zeiger1->Next;
+            zeiger=(TMedia *)(calloc(1, sizeof(TMedia)));
+            if(NULL == zeiger)
+            {
+                fprintf(stderr, "Kein Speicher zum alloziieren verfuegbar!\n");
+                return 0;
+            }
 
-					while(zeiger1->Next != zeiger)
-						zeiger1=zeiger->Next;
-					zeiger=(TMedia *)(calloc(1, sizeof(TMedia)));
-					if(NULL == zeiger)
-					{
-						fprintf(stderr, "Kein Speicher zum alloziieren verfuegbar!\n");
-						return 0;
-					}
-
-                    *zeiger = *eingabe;
-					zeiger->Next=zeiger1->Next;
-					zeiger->Prev=zeiger1;
-					zeiger1->Next=zeiger;
-					zeiger1->Next->Prev=zeiger;
-				} 
-			
+            *zeiger = *eingabe;
+            zeiger->Next=zeiger1->Next;
+            zeiger->Prev=zeiger1;
+            zeiger1->Next=zeiger;
+            zeiger1->Next->Prev=zeiger;
+            return 1;
+        } 
+    
 	}
-}
+} 
 /**********************************************************
 * FUNCTION:        freeMe
 * --------------------------------------------------------

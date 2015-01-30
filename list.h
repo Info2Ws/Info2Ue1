@@ -6,9 +6,8 @@
 #include "datastructure.h"
 
 /* Funktionsprototypen */
-void insertInMediaList();
-void removeFromMediaList();
-int cmpMediatitle();
+void insertInList(TMedia *Neu);
+void removeFromList();
 
 
 #endif

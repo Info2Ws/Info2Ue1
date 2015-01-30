@@ -8,7 +8,7 @@
 /* Funktions Prototypen */
 int loadMedia();
 void loadOneMedia(FILE * data);
-void loadOneTrack(FILE * data, int TrackNr);
+void loadOneTrack(FILE * data, int TrackNr, TMedia *Medium);
 int saveMedia();
 void saveOneMedia(FILE *data, int CurrentMedium);
 void saveOneTrack(FILE *data, TMedia *Medium, int TrackNumber);

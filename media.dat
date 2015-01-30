@@ -1,0 +1,278 @@
+<Data>
+ <Media>
+  <Track>
+   <Tracknr>1</Tracknr>
+   <Title>Achterbahn</Title>
+   <Duration>03:40</Duration>
+  </Track>
+  <Interpret>Wise Guys</Interpret>
+  <Track>
+   <Tracknr>2</Tracknr>
+   <Title>Ein dickes Ding</Title>
+   <Duration>02:22</Duration>
+  </Track>
+  <Mediatype>1</Mediatype>
+  <Track>
+   <Tracknr>3</Tracknr>
+   <Title>Ich bin wie ich bin</Title>
+   <Duration>03:09</Duration>
+  </Track>
+  <Title>Achterbahn</Title>
+  <Track>
+   <Tracknr>4</Tracknr>
+   <Title>Das Saegewerk Bad Segeberg</Title>
+   <Duration>02:41</Duration>
+  </Track>
+  <Track>
+   <Tracknr>5</Tracknr>
+   <Title>Ein Engel</Title>
+   <Duration>03:39</Duration>
+  </Track>
+  <AppearanceYear>2014</AppearanceYear>
+  <Track>
+   <Tracknr>6</Tracknr>
+   <Title>Ans Ende der Welt</Title>
+   <Duration>03:36</Duration>
+  </Track>
+  <Track>
+   <Tracknr>7</Tracknr>
+   <Title>Keine gute Idee</Title>
+   <Duration>03:28</Duration>
+  </Track>
+  <Track>
+   <Tracknr>8</Tracknr>
+   <Title>Laecheln lernen</Title>
+   <Duration>02:46</Duration>
+  </Track>
+  <Track>
+   <Tracknr>9</Tracknr>
+   <Title>Dein Blick</Title>
+   <Duration>02:36</Duration>
+  </Track>
+  <Track>
+   <Tracknr>10</Tracknr>
+   <Title>Generation Hoergeraet</Title>
+   <Duration>03:56</Duration>
+  </Track>
+  <Track>
+   <Tracknr>11</Tracknr>
+   <Title>Antidepressivum</Title>
+   <Duration>02:51</Duration>
+  </Track>
+  <Track>
+   <Tracknr>12</Tracknr>
+   <Title>Ich kann nur den Refrain</Title>
+   <Duration>03:39</Duration>
+  </Track>
+  <Track>
+   <Tracknr>13</Tracknr>
+   <Title>Alles so schoen bunt hier</Title>
+   <Duration>03:47</Duration>
+  </Track>
+  <Track>
+   <Tracknr>14</Tracknr>
+   <Title>Kuess mich</Title>
+   <Duration>03:11</Duration>
+  </Track>
+  <Track>
+   <Tracknr>15</Tracknr>
+   <Title>Dankbar fuer die Zeit</Title>
+   <Duration>04:04</Duration>
+  </Track>
+  <Track>
+   <Tracknr>16</Tracknr>
+   <Title>Immer fuer dich da</Title>
+   <Duration>03:19</Duration>
+  </Track>
+ </Media>
+ <Media>
+  <Title>50 Jahre Bravo 2056 - 2006</Title>
+  <Mediatype>1</Mediatype>
+  <AppearanceYear>2006</AppearanceYear>
+  <Track>
+   <Tracknr>1</Tracknr>
+   <Title>We Are The Champions</Title>
+   <Interpret>Queen</Interpret>
+   <Duration>03:01</Duration>
+  </Track>
+  <Track>
+   <Tracknr>2</Tracknr>
+   <Title>It Must Have Been Love</Title>
+   <Interpret>Roxette</Interpret>
+   <Duration>04:19</Duration>
+  </Track>
+  <Track>
+   <Tracknr>3</Tracknr>
+   <Title>Candle In The Wind</Title>
+   <Interpret>Elton John</Interpret>
+   <Duration>03:49</Duration>
+  </Track>
+  <Track>
+   <Tracknr>4</Tracknr>
+   <Title>Back To You</Title>
+   <Interpret>Bryan Adams</Interpret>
+   <Duration>04:35</Duration>
+  </Track>
+  <Track>
+   <Tracknr>5</Tracknr>
+   <Title>Flugzeuge im Bauch</Title>
+   <Interpret>Herbert Groenemeyer</Interpret>
+   <Duration>03:53</Duration>
+  </Track>
+  <Track>
+   <Tracknr>6</Tracknr>
+   <Title>The Best</Title>
+   <Interpret>Tina Turner</Interpret>
+   <Duration>04:08</Duration>
+  </Track>
+  <Track>
+   <Tracknr>7</Tracknr>
+   <Title>I Can't Dance</Title>
+   <Interpret>Genesis</Interpret>
+   <Duration>04:00</Duration>
+  </Track>
+  <Track>
+   <Tracknr>8</Tracknr>
+   <Title>When Doves Cry</Title>
+   <Interpret>Prince</Interpret>
+   <Duration>05:53</Duration>
+  </Track>
+  <Track>
+   <Tracknr>9</Tracknr>
+   <Title>Wild Boys</Title>
+   <Interpret>Duran Duran</Interpret>
+   <Duration>04:17</Duration>
+  </Track>
+  <Track>
+   <Tracknr>10</Tracknr>
+   <Title>Enjoy The Silence</Title>
+   <Interpret>Depeche Mode</Interpret>
+   <Duration>04:16</Duration>
+  </Track>
+  <Track>
+   <Tracknr>11</Tracknr>
+   <Title>The Sun Always Shines On T.V.</Title>
+   <Interpret>A-Ha</Interpret>
+   <Duration>05:07</Duration>
+  </Track>
+  <Track>
+   <Tracknr>12</Tracknr>
+   <Title>Super Trouper</Title>
+   <Interpret>Abba</Interpret>
+   <Duration>04:12</Duration>
+  </Track>
+  <Track>
+   <Tracknr>13</Tracknr>
+   <Title>Every Breath You Take</Title>
+   <Interpret>Police</Interpret>
+   <Duration>04:13</Duration>
+  </Track>
+  <Track>
+   <Tracknr>14</Tracknr>
+   <Title>Ain't She Sweet</Title>
+   <Interpret>Beatles</Interpret>
+   <Duration>02:13</Duration>
+  </Track>
+  <Track>
+   <Tracknr>15</Tracknr>
+   <Title>You Made Me Believe in Magic</Title>
+   <Interpret>Bay City Rollers</Interpret>
+   <Duration>02:41</Duration>
+  </Track>
+  <Track>
+   <Tracknr>16</Tracknr>
+   <Title>Surfin U.S.A.</Title>
+   <Interpret>The Beach Boys</Interpret>
+   <Duration>02:28</Duration>
+  </Track>
+  <Track>
+   <Tracknr>17</Tracknr>
+   <Title>Jailhouse Rock</Title>
+   <Interpret>Elvis Presley</Interpret>
+   <Duration>02:27</Duration>
+  </Track>
+  <Track>
+   <Tracknr>18</Tracknr>
+   <Title>I Was Made For Lovin You</Title>
+   <Interpret>Kiss</Interpret>
+   <Duration>04:31</Duration>
+  </Track>
+  <Track>
+   <Tracknr>19</Tracknr>
+   <Title>Keep The Faith</Title>
+   <Interpret>Bon Jovi</Interpret>
+   <Duration>05:44</Duration>
+  </Track>
+  <Track>
+   <Tracknr>20</Tracknr>
+   <Title>Hier kommt Alex</Title>
+   <Interpret>Die Toten Hosen</Interpret>
+   <Duration>03:54</Duration>
+  </Track>
+  <Track>
+   <Tracknr>21</Tracknr>
+   <Title>Never Forget</Title>
+   <Interpret>Take That</Interpret>
+   <Duration>06:24</Duration>
+  </Track>
+ </Media>
+ <Media>
+  <Title>Der kleine Ritter Trenk</Title>
+  <Mediatype>2</Mediatype>
+  <AppearanceYear>2012</AppearanceYear>
+  <Track>
+   <Tracknr>1</Tracknr>
+   <Title>Aufbruch in der Nacht</Title>
+   <Duration>23:57</Duration>
+  </Track>
+  <Track>
+   <Tracknr>2</Tracknr>
+   <Title>Der Ferkeltrick</Title>
+   <Duration>23:57</Duration>
+  </Track>
+  <Track>
+   <Tracknr>3</Tracknr>
+   <Title>Ueberfall auf die Burg</Title>
+   <Duration>23:57</Duration>
+  </Track>
+  <Track>
+   <Tracknr>4</Tracknr>
+   <Title>Die Raeuberfalle</Title>
+   <Duration>23:57</Duration>
+  </Track>
+  <Track>
+   <Tracknr>5</Tracknr>
+   <Title>Das Heiratsversprechen</Title>
+   <Duration>23:57</Duration>
+  </Track>
+ </Media>
+ <Media>
+  <AppearanceYear>2014</AppearanceYear>
+  <Mediatype>4</Mediatype>
+  <Title>Sortiert-Test-Medium</Title>
+  <Track>
+   <Tracknr>1</Tracknr>
+   <Title>Track 1</Title>
+   <Interpret>Interpret 2</Interpret>
+   <Duration>01:00</Duration>
+  </Track>
+  <Track>
+   <Tracknr>2</Tracknr>
+   <Title>Track 2</Title>
+   <Interpret>Interpret 1</Interpret>
+   <Duration>01:30</Duration>
+  </Track>
+  <Track>
+   <Tracknr>3</Tracknr>
+   <Title>Track 3</Title>
+   <Interpret>Interpret 1</Interpret>
+   <Duration>01:00</Duration>
+  </Track>
+  <Track>
+   <Tracknr>4</Tracknr>
+   <Title>Track 4</Title>
+   <Interpret>Interpret 2</Interpret>
+   <Duration>01:30</Duration>
+  </Track>
+ </Media>
+</Data>

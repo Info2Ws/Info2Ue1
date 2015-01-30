@@ -31,7 +31,7 @@ typedef struct medien
 {
 	char *title;
 	char *interpret;
-	TMediatype *Type;
+	TMediatype Type;   //makes no sense as pointer too
 	unsigned int Releasedate;
 	unsigned int Totalnumber;
    	TTrack Tracks[MAXTRACKS];

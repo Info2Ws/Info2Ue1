@@ -67,7 +67,10 @@
         free(text);
         if (MediaField != NULL) /* Medium-Tag gefunden */
         {
+            //Speichere temporär in Medias und übergebe an inserInList
             loadOneMedia(data);
+            insertInList(Medias);
+            memset(Medias, 0, sizeof(TMedia));  //leere Medias 
         }
     }
     fclose(data);
@@ -81,6 +84,7 @@
  * STATUS:          
  * LAST EDIT:		21.01.2015 PS
  **********************************************************/
+//TODO: Lade Medientyp
  void loadOneMedia(FILE * data)
  {
     char * line;
@@ -89,6 +93,7 @@
     int MediaEnd = 0;
     int len;
     int TrackNr = 0;
+    TMedia *Medium = Medias; //benutzt Medias als temporäre Variable
 
     while (!MediaEnd)
     {
@@ -97,20 +102,20 @@
         if (matchTag = strstr(line, "<Interpret>"))
         {
             len = strlen(line);
-            line[len - 13] = '\0';
+            line[len - 14] = '\0';
             text = (char *) matchTag;
             text += 11;
-            (Medias + MediaCounter)->interpret = calloc(len - 23, sizeof(char));
-            strcpy((Medias + MediaCounter)->interpret, text);
+            (Medium)->interpret = calloc(len - 24, sizeof(char));
+            strcpy((Medium)->interpret, text);
         }
         if (matchTag = strstr(line, "<Title>"))
         {
             len = strlen(line);
-            line[len - 9] = '\0';
+            line[len - 10] = '\0';
             text = (char *) matchTag;
             text += 7;
-            (Medias + MediaCounter)->title = calloc(len - 16, sizeof(char));
-            strcpy((Medias + MediaCounter)->title, text);
+            (Medium)->title = calloc(len - 17, sizeof(char));
+            strcpy((Medium)->title, text);
         }
         if (matchTag = strstr(line, "<Releasedate>"))
         {
@@ -118,17 +123,17 @@
             line[len - 15] = '\0';
             text = (char *) matchTag;
             text += 13;
-            (Medias + MediaCounter)->Releasedate = atoi(text);
+            (Medium)->Releasedate = atoi(text);
         }
         if (matchTag = strstr(line, "<Track>"))
         {
-            loadOneTrack(data, TrackNr);
+            loadOneTrack(data, TrackNr, Medium);
             TrackNr++;
         }
 
         if (matchTag = strstr(line, "</Media>"))
         {
-            (Medias + MediaCounter)->Totalnumber = TrackNr;
+            (Medium)->Totalnumber = TrackNr;
             MediaEnd = 1;
         }
         free(line);
@@ -142,14 +147,14 @@
  * STATUS:          
  * LAST EDIT:		21.01.2015 PS
  **********************************************************/
- void loadOneTrack(FILE * data, int TrackNr)
+ void loadOneTrack(FILE * data, int TrackNr, TMedia *Medium)
  {
     char * line;
     char * text;
     void * matchTag;
     int TrackEnd = 0;
     int len;
-    TTrack * Tp = ((Medias + MediaCounter)->Tracks)+TrackNr;
+    TTrack * Tp = ((Medium)->Tracks)+TrackNr;
     
     while (!TrackEnd)
     {
@@ -158,28 +163,28 @@
         if ((matchTag = strstr(line, "<Tracknr>")))
         {
             len = strlen(line);
-            line[len - 11] = '\0';
+            line[len - 12] = '\0';
             text = (char *) matchTag;
             text += 9;
-            (Tp->Tracknr) = (unsigned int) calloc(len - 19, sizeof(unsigned int));
+            (Tp->Tracknr) = (unsigned int) calloc(len - 20, sizeof(unsigned int));
             (Tp->Tracknr) = (unsigned int) atoi(text);
         }
         if ((matchTag = strstr(line, "<Title>")))
         {
             len = strlen(line);
-            line[len - 9] = '\0';
+            line[len - 10] = '\0';
             text = (char *) matchTag;
             text += 7;
-            (Tp->title) = calloc(len - 16, sizeof(char));
+            (Tp->title) = calloc(len - 17, sizeof(char));
             strcpy((Tp->title), text);
         }
-        if (matchTag = strstr(line, "<Interpret>"))
+        if ((matchTag = strstr(line, "<Interpret>")))
         {
             len = strlen(line);
-            line[len - 13] = '\0';
+            line[len - 14] = '\0';
             text = (char *) matchTag;
             text += 11;
-            (Tp->interpret) = calloc(len - 16, sizeof(char));
+            (Tp->interpret) = calloc(len - 17, sizeof(char));
             strcpy((Tp->interpret) , text);
 
         }
@@ -245,8 +250,16 @@ int saveMedia()
  **********************************************************/
 void saveOneMedia(FILE *data, int CurrentMedium)
 {
-    TMedia *Medium = Medias + CurrentMedium;
-    int i;
+    //AN A5 ANPASSEN!!!
+    //TMedia *Medium = Medias + CurrentMedium;
+    TMedia *Medium = First;
+    int i, j;
+
+    //durch die Liste an das passende Medium springen
+    for(j = 0; j < CurrentMedium; j++)
+    {
+        Medium = Medium->Next;
+    }
 
     /* Schreiben der Eigenschaften des Medium in die Datenbank */
     /* für printf eher kein adressoperator !!!!!!!!!!!!!!!!!!!!!!! checken! */

@@ -37,7 +37,7 @@ int main()
     int choice = 0;            //Auswahlvariable
     int exit = 1;   //Abbruchvariable für fußgesteuerte Schleife
 
-	loadMedia(); //Laden der Datenbank von Datei
+	//loadMedia(); //Laden der Datenbank von Datei
 	
     do
     {
