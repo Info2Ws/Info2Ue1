@@ -55,6 +55,6 @@ typedef struct Hash
 
 extern int MediaCounter;
 extern TMedia *First, *Last;
-extern THashs MediaIndex[MaxIndex];
+extern THashElement MediaIndex[MaxIndex];
 
 #endif
