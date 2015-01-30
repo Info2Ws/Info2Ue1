@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 #define MAXTRACKS  30
-#define MAXINDEX 30
+#define MAXINDEX 307
 
 typedef struct
 {
