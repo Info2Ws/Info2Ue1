@@ -36,10 +36,10 @@ int main()
 =======
 >>>>>>> origin/master
     
-    Medias = (TMedia*)(calloc(1, sizeof(TMedia))); //TO DO: Auf NULL initialisieren (ne, macht calloc...)
+    Medias = (TMedia*)(calloc(1, sizeof(TMedia)));
     First = Last = NULL;
 
-    char * menutitle = "Medien-Verwaltung Deluxe";      //wir brauchen einen besseren namen..
+    char * menutitle = "Medien-Verwaltung Deluxe";
 <<<<<<< HEAD
     char * menu[9] = {	"1. Neues Medium anlegen",
     	    		"2. Medium bearbeiten", 
