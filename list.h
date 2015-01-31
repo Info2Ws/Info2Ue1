@@ -6,8 +6,9 @@
 #include "datastructure.h"
 
 /* Funktionsprototypen */
-void insertInList(TMedia *Neu);
-void removeFromList();
+int insertInList(TMedia *Neu);
+int cmpMediaTitleAsc(TMedia *t1, TMedia *t2);
+TMedia * removeFromList(int delIndex);
 
 
 #endif

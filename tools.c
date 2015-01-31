@@ -203,5 +203,68 @@ int getNumber(char *prompt, int **input, int from, int to)
 
     return 1;
 }
+/**********************************************************
+* FUNCTION: freeMedia
+* --------------------------------------------------------
+* DESCRIPTION: sets Media free forever
+**********************************************************
+void freeMedia()
+{
+	int i;
+	TListElement *list;
+	TListElement *list2;
+	TMedia *list = Ende;
+	TMedia *list2 = NULL;
+	if(MediaCounter==0)
+	{
+		printf("Keine Medien vorhanden.\n\n");
+		waitForEnter();
+		return;
+	}
+	while(list)
+	{
+		list2 = list->Prev;
+		freeOneMedia(list);
+		free(list);
+		list = list2;
+	}
+	for(i=0; i<MAXINDEX; i++)
+	{
+		if( (MediaIndex+i)!= NULL )
+		{
+			list = (MediaIndex+i)->FirstList;
+			while(list)
+			{
+				list2 = list->Next;
+				free(list);
+				list = list2;
+			}
+		}
+}
+printf("\nSpeicher wieder freigegeben.\n");
+}
+void freeOneMedia(TMedia *M)
+{
+	int i;
+	if(M->Title != NULL)
+		free(M->Title);
+	if(M->Interpret != NULL)
+		free(M->Interpret);
+	for( i = 0; i < (M->TrackNr ); i++)
+	{
+	freeOneTrack(M->Tracks+i );
+	}
+}
+void freeOneTrack(TTrack *tpoint)
+{
+	if(tpoint->tInterpret!=NULL)
+		free(tpoint->tInterpret);
+	if(tpoint->tTitle != NULL)
+		free(tpoint->tTitle);
+	if(tpoint->lp != NULL)
+		free(tpoint->lp);
+}
+
+*/
 
 

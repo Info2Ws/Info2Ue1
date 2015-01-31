@@ -139,6 +139,7 @@ void sortTracks()
  *********************************************************/
 void listMedia()
 {
+    TMedia *tmp = First;
     int i = 0;//Laufvariable
 
     //Ausgabe des Menuetitels
@@ -155,7 +156,8 @@ void listMedia()
         //Auflistung aller Medien
         for(i = 0 ; i < MediaCounter ; i++)
         {
-            listOneMedia(i);
+            listOneMedia(tmp);
+            tmp = tmp->Next;
         }
     }
 }
@@ -166,16 +168,10 @@ void listMedia()
  *					interpret, Releasedate, Totalnumber)
  * LAST EDIT:		21.01.2015 PS
  *********************************************************/
-void listOneMedia(int Mediennr)
+void listOneMedia(TMedia *M)
 {	
-    TMedia * M = First;
-    int i = 0, j = 0; //Laufvariable
+    int i = 0; //Laufvariable
 
-    //Abhängig von Mediennr durch die Liste springen
-    for(; j < Mediennr; j++)
-    {
-        M = M->Next;
-    }
     //Ausgabe der Medieninformationen
     printf("Titel             : %s\n", M->title);
     if(M->interpret != NULL)

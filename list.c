@@ -5,10 +5,10 @@
 
 
 /**********************************************************
- * FUNCTION:        appendinList
+ * FUNCTION:        
  * --------------------------------------------------------
- * DESCRIPTION:     appends data into list
- *                  after userinput via stdin
+ * DESCRIPTION:     
+ *                  
  * STATUS:          
  **********************************************************/ 
 int insertInList(TMedia *Neu)
@@ -28,23 +28,51 @@ int insertInList(TMedia *Neu)
     
     cmpResult = cmpMediaTitleAsc(First, Neu); 
 
-    if(cmpResult > 0)
+    if(cmpResult >= 0)
     {
         //Fall2: Vor dem ersten Element
-        Neu->Next = Neu->Prev = NULL;
-        First = Last = Neu;
+        Neu->Next = First;
+        Neu->Prev = NULL;
+        First = First->Prev = Neu;
         return 1;
     }
     
-    if(cmpResult <= 0)
+
+   /* if(cmpResult < 0)
     {
-        //Fall3: Nach dem Element
-
-
-
+        //Fall3: Nach dem letzen Element
+        Neu->Prev = Last;
+        Neu->Next = NULL;
+        Last = Last->Next = Neu;
+        return 1;
+    }*/
     
+    while(temp->Next != NULL && (cmpResult = cmpMediaTitleAsc(temp, Neu)) < 0)
+    {
+        //cmpResult = cmpMediaTitleAsc(temp, Neu); 
 
 
+        if(cmpResult <= 0 && (temp->Next != NULL))
+        {   //Fall4: Dazwischen
+            Neu->Next = temp->Next;
+            Neu->Prev = temp;
+            temp->Next = temp->Next->Prev = Neu;
+            return 1;
+        }
+
+        if(cmpResult < 0 && (temp->Next == NULL))
+        {
+            //Fall3: Nach dem letzen Element
+            Neu->Prev = Last;
+            Neu->Next = NULL;
+            Last = Last->Next = Neu;
+            return 1;
+        }
+
+        temp = temp->Next;
+    }
+    return 0;
+}
 
 /**********************************************************
  * FUNCTION:        cmpMediaTitleAsc 
@@ -73,6 +101,64 @@ int cmpMediaTitleAsc(TMedia *t1, TMedia *t2)
 	}
 	return 0;
 }
+
+/**********************************************************
+ * FUNCTION:        removeFromList
+ * --------------------------------------------------------
+ * DESCRIPTION:     deletes items from list
+ *		    checks for:
+ *		    Empty List
+ *		    First Element
+ *		    Last Element
+ *		    Somewhere inbetween
+ *                  
+ * STATUS:          
+ ********************************************************** 
+TMedia * removeFromList(int delIndex)
+{
+    TMedia * M = NULL, * Prev = NULL;
+    
+    if (First == NULL) //bei leerer Liste
+        return NULL;
+    
+    if (First->Index == delIndex)
+    {
+        M = First;
+        First = First->Next;
+        if (First == NULL) //Nur ein Element?
+            Last = NULL;
+        else
+            First->Prev = NULL;
+        return M;
+    }
+	//Letztes Element entfernen
+    if (Last->Index == delIndex)
+    {
+        M = Last;
+        Last = Last->Prev;
+        Last->Next = NULL;
+        return M;
+    }
+    //Gesuchtes Element mittig
+    M = First->Next;
+    while (M != NULL)
+    {
+		if (M->Index == delIndex)
+		{
+			Prev = M->Prev;
+			Prev->Next = M->Next;
+			Prev->Next->Prev = Prev;
+			return M;
+		}
+		M = M->Next;
+	}
+    printf("Der gewuenschte Titel konnte nicht gefunden werden");
+    return NULL;
+} 
+
+*/
+
+//=============================================================
 /*
 void appendInList(TMedia *eingabe)
 {
@@ -266,7 +352,7 @@ int cmpMediaTitle(TMedia *t1, TMedia *t2)
 * STATUS:          
 **********************************************************/ 
 
-
+/*
 void freeMe(char *removeme)
 {
 	struct medien *zeiger, *zeiger1, *zeiger2;
@@ -315,5 +401,6 @@ void freeMe(char *removeme)
 		}
 	}
 	else
-		printf("Der zu loeschende Datensatz wurde nicht gefunden!\n");
+		printf("Der zu loeschende Datensatz wurde nicht gefunden!\n"); 
 }
+*/

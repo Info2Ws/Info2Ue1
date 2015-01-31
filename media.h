@@ -14,7 +14,7 @@ int createTrack(TTrack * pT, char * wI);
 void searchTrack();
 void sortTracks();
 void listMedia();
-void listOneMedia(int Mediennr);
+void listOneMedia(TMedia *M);
 void listOneTrack(TMedia * M, int Tracknum);
 
 #endif
