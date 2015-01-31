@@ -19,6 +19,7 @@
 #include "datetime.h"
 #include "database.h"
 #include "sort.h"
+#include "list.h"
 
 //TMedia Medias[MAXMEDIA];
 TMedia *Medias;

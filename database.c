@@ -69,8 +69,6 @@
         {
             //Speichere temporär in Medias und übergebe an inserInList
             loadOneMedia(data);
-            insertInList(Medias);
-            memset(Medias, 0, sizeof(TMedia));  //leere Medias 
         }
     }
     fclose(data);
@@ -93,7 +91,11 @@
     int MediaEnd = 0;
     int len;
     int TrackNr = 0;
-    TMedia *Medium = Medias; //benutzt Medias als temporäre Variable
+
+    //Wie bei createMedia() wird Medium dann an inserInList weitergegeben
+    TMedia *Medium = calloc(1, sizeof(TMedia));
+    if(!Medium)
+        printf("\nFehler: Speicher für das Laden konnte nicht eingeräumt werden!\n");
 
     while (!MediaEnd)
     {
@@ -139,6 +141,7 @@
         free(line);
     }
     MediaCounter++;
+    insertInList(Medium);
  }
 /**********************************************************
  * FUNCTION:        loadOneTrack 

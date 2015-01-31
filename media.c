@@ -54,7 +54,7 @@ void createMedia()
 	//Naechstes Medium
 	MediaCounter++;
 
-    //In Doppelt-Verkettete Liste einfügen und anschließen Medias wieder leeren
+    //In Doppelt-Verkettete Liste einfügen
     insertInList(M);
     //memset(Medias, 0, sizeof(TMedia)); 
 }
@@ -180,10 +180,10 @@ void listOneMedia(TMedia *M)
     }
     switch(M->Type) //Medientyp
     {
-        case 1: printf("Medientyp         : CD\n");        break;
-        case 2: printf("Medientyp         : DVD\n");       break;
-        case 3: printf("Medientyp         : Blueray\n");   break;
-        case 4: printf("Medientyp         : Sonstiges\n"); break;
+        case 0: printf("Medientyp         : CD\n");        break;
+        case 1: printf("Medientyp         : DVD\n");       break;
+        case 2: printf("Medientyp         : Blueray\n");   break;
+        case 3: printf("Medientyp         : Sonstiges\n"); break;
     }
     printf("Erscheinungsjahr  : %i\n", M->Releasedate);
     printf("Anzahl der Tracks : %i\n", M->Totalnumber);

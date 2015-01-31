@@ -47,12 +47,12 @@ int insertInList(TMedia *Neu)
         return 1;
     }*/
     
-    while(temp->Next != NULL && (cmpResult = cmpMediaTitleAsc(temp, Neu)) < 0)
+    while(temp->Next != NULL)
     {
-        //cmpResult = cmpMediaTitleAsc(temp, Neu); 
+        cmpResult = cmpMediaTitleAsc(temp, Neu);
 
-
-        if(cmpResult <= 0 && (temp->Next != NULL))
+        //if(cmpResult >= 0 && (temp->Next != NULL))
+        if(cmpResult >= 0)
         {   //Fall4: Dazwischen
             Neu->Next = temp->Next;
             Neu->Prev = temp;
@@ -60,7 +60,7 @@ int insertInList(TMedia *Neu)
             return 1;
         }
 
-        if(cmpResult < 0 && (temp->Next == NULL))
+      /*  if(cmpResult <= 0 && (temp->Next == NULL))
         {
             //Fall3: Nach dem letzen Element
             Neu->Prev = Last;
@@ -68,9 +68,20 @@ int insertInList(TMedia *Neu)
             Last = Last->Next = Neu;
             return 1;
         }
-
+        */
         temp = temp->Next;
     }
+
+    if(cmpResult <= 0 && (temp->Next == NULL))
+    {
+        //Fall3: Nach dem letzen Element
+        Neu->Prev = Last;
+        Neu->Next = NULL;
+        Last = Last->Next = Neu;
+        return 1;
+    }
+    else
+        printf("\nDa blieb ein Fall wohl unbeachtet bei insertInList!\n");
     return 0;
 }
 
@@ -86,10 +97,20 @@ int insertInList(TMedia *Neu)
  **********************************************************/ 
 int cmpMediaTitleAsc(TMedia *t1, TMedia *t2)
 {
-	char *str1 = &(t1->title);
-	char *str2 = &(t2->title);
+	char *str1 = (t1->title);  //doch bloß kein & davor!
+	char *str2 = (t2->title);  //denn title ist eine adresse
 	int i = 0;
 
+    //if adress of both titles is NULL return 0
+    if((str1 == '\0') && (str2 == '\0'))
+    {
+        return 0;
+    }
+    //if adress of one is NULL: change value of that str to \0
+    if(str1 == NULL)
+        *str1 = '\0';
+    if(str2 == NULL)
+        *str2 = '\0';
 	//work, as string1 and 2 are not at end
 	while((*(str1 + i) != '\0'))
 	{
@@ -159,6 +180,8 @@ TMedia * removeFromList(int delIndex)
 */
 
 //=============================================================
+//=============================================================
+//=============================================================
 /*
 void appendInList(TMedia *eingabe)
 {
@@ -206,7 +229,6 @@ void appendInList(TMedia *eingabe)
 }
 
 
-/**********************************************************
  * FUNCTION:        cmpMediaTitleAsc 
  * --------------------------------------------------------
  * DESCRIPTION:     compares two mediatitles
@@ -263,7 +285,7 @@ int cmpMediaTitle(TMedia *t1, TMedia *t2)
 	return 0;
 }
 
-/**********************************************************
+**********************************************************
  * FUNCTION:        insertInList
  * --------------------------------------------------------
  * DESCRIPTION:     inserts new media into list
@@ -345,7 +367,7 @@ int cmpMediaTitle(TMedia *t1, TMedia *t2)
     
 	}
 } 
-/**********************************************************
+**********************************************************
 * FUNCTION:        freeMe
 * --------------------------------------------------------
 * DESCRIPTION:     frees Memory according to deleted Data
