@@ -183,7 +183,7 @@ int getText(char *prompt, int plength, int allowempty, char **input)
  * RESULT:          int
  * STATUS:          WIP 
  **********************************************************/
-int getNumber(char *prompt, int **input, int from, int to)
+int getNumber(char *prompt, int *input, int from, int to)
 {
     //Variablen
     int scanreturn = NULL;

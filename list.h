@@ -8,7 +8,8 @@
 /* Funktionsprototypen */
 int insertInList(TMedia *Neu);
 int cmpMediaTitleAsc(TMedia *t1, TMedia *t2);
-TMedia * removeFromList(int delIndex);
+void deleteMedia();
+TMedia *removeFromList(int delIndex, int direction);
 
 
 #endif

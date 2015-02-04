@@ -16,7 +16,7 @@ typedef struct
 
 
 typedef enum
-{ CD, DVD, Blueray, Sonstiges
+{CD, DVD, Blueray, Sonstiges
 }TMediatype;
 
 typedef struct

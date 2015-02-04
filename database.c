@@ -253,8 +253,6 @@ int saveMedia()
  **********************************************************/
 void saveOneMedia(FILE *data, int CurrentMedium)
 {
-    //AN A5 ANPASSEN!!!
-    //TMedia *Medium = Medias + CurrentMedium;
     TMedia *Medium = First;
     int i, j;
 
@@ -265,7 +263,6 @@ void saveOneMedia(FILE *data, int CurrentMedium)
     }
 
     /* Schreiben der Eigenschaften des Medium in die Datenbank */
-    /* für printf eher kein adressoperator !!!!!!!!!!!!!!!!!!!!!!! checken! */
     fprintf(data, "\t<Media>\n");
     if((Medium->interpret) != NULL)
         fprintf(data, "\t\t<Interpret>%s</Interpret>\n", (Medium->interpret));

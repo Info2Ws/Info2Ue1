@@ -39,24 +39,22 @@
  void kuhsort(TMedia *medium, int type)
  {
      int idx_medium;      //index of actual medium
-     TMedia *actual_medium; //will point on actual medium
+     TMedia *actual_medium = First; //will point on actual medium
      //fill array with compare functions
      cmp[0] = cmpTracknr;
      cmp[1] = cmpTitle;
      cmp[2] = cmpInterpret;
      cmp[3] = cmpDuration;
 
-     
-     //go through all saved media
-     for(idx_medium = 0; idx_medium < MediaCounter; idx_medium++)
+     //sort and jump to next medium in List as long as there is an element
+     while(actual_medium != NULL)
      {
-         actual_medium = medium + idx_medium; 
          printf("\nTrack des Mediums %s sortieren ... ", actual_medium->title);
          //sort actual medium, with [type] comparing function, from 0 to Mediums Totalnumber
          ksort((actual_medium->Tracks), cmp[type], 0, ((actual_medium->Totalnumber) - 1)); 
          printf("ok");
-     }
-
+         actual_medium = actual_medium->Next;       //actual medium is next medium
+     }  
  }
 
 /**********************************************************

@@ -68,15 +68,6 @@ void editMedia()
 	printf("editMedia");
 }
 /**********************************************************
- * FUNCTION:        deleteMedia 
- * --------------------------------------------------------
- * DESCRIPTION:
- *********************************************************/
-void deleteMedia()
-{
-	printf("deleteMedia");
-}
-/**********************************************************
  * FUNCTION:        createTrack 
  * --------------------------------------------------------
  * DESCRIPTION: 	Creates a Track (tracknr, title, interpret, 
@@ -116,7 +107,7 @@ void sortTracks()
 	"3. Tracks nach Interpret sortieren", "4. Tracks nach Dauer sortieren", "5. zurueck zum Hauptmenue"};
     int choice = 0; //Auswahlvariable
     int exit = 1; //Abbruchvariable für fußgesteuerte Schleife
-	    do
+    do
 	{
         choice = getMenu(submenutitle, menu, 5, 1); //Aufruf des Submenüs
 
@@ -131,19 +122,46 @@ void sortTracks()
     }while(exit);
 }
 /**********************************************************
+ * FUNCTION:        list 
+ * --------------------------------------------------------
+ * DESCRIPTION:		for listing everything (mainly Media...)
+ * ARGUMENTS        will ask for listing direction
+ *                  and calls listMedia with the right argument
+ *                             
+ *********************************************************/
+void list()
+{
+    char *list_menutitle = "Ausgabe";
+    char *list_menu[3] = {"1. Vorwaerts ausgeben", "2. Rueckwaerts ausgeben", "3. Zurueck zum Hauptmenu"};
+    int choice = 0;
+    int exit = 1;
+    do
+    {
+        choice = getMenu(list_menutitle, list_menu, 3, 1);
+        switch(choice)
+        {
+            case 1: listMedia(0); exit = 0; break;
+            case 2: listMedia(1); exit = 0; break;
+            case 3: exit = 0;               break;
+        }
+    }while(exit);
+}
+/**********************************************************
  * FUNCTION:        listMedia 
  * --------------------------------------------------------
  * DESCRIPTION:		Creates Menuetitle and checks if there
  *					is at least 1 Media
+ * ARGUMENTS        direction: 0 - forward
+ *                             1 - backward
  * LAST EDIT:		21.01.2015 PS
  *********************************************************/
-void listMedia()
+void listMedia(unsigned int direction)
 {
-    TMedia *tmp = First;
-    int i = 0;//Laufvariable
+    TMedia *tmp = (direction == 0) ? First : Last; //beginne je nach Richtung vorn oder hinten
+    int i = 0;      //Laufvariable
 
     //Ausgabe des Menuetitels
-    printf("Liste der Medien\n");
+    printf("Liste der Medien:\n");
     printLine('-' , 16);
     printf("\n\n");
 
@@ -151,13 +169,13 @@ void listMedia()
     {
         printf("Keine Medien vorhanden!\n");
     }
-    else
+    else 
     {
-        //Auflistung aller Medien
+        //Auflistung aller Medien vorwärts
         for(i = 0 ; i < MediaCounter ; i++)
         {
             listOneMedia(tmp);
-            tmp = tmp->Next;
+            tmp = (direction == 0) ? tmp->Next :tmp->Prev;
         }
     }
 }
@@ -180,6 +198,7 @@ void listOneMedia(TMedia *M)
     }
     switch(M->Type) //Medientyp
     {
+        //korrigieren...
         case 0: printf("Medientyp         : CD\n");        break;
         case 1: printf("Medientyp         : DVD\n");       break;
         case 2: printf("Medientyp         : Blueray\n");   break;

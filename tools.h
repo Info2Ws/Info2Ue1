@@ -13,7 +13,7 @@ void clearScreen();
 void printLine(char c, int n);
 int askAgain();
 int getText(char *prompt, int plength, int allowempty, char **input);
-int getNumber(char *prompt, int **input, int from, int to);
+int getNumber(char *prompt, int *input, int from, int to);
 //void freeMedia();
 //void freeOneMedia(TMedia *M);
 
