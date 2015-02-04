@@ -107,7 +107,10 @@ int cmpMediaTitleAsc(TMedia *t1, TMedia *t2)
 /**********************************************************
  * FUNCTION:        deleteMedia 
  * --------------------------------------------------------
- * DESCRIPTION:
+ * DESCRIPTION:     lists media forward or backward
+ *                  and passes the chosen Media (int) to the
+ *                  removeFromList function which passes
+ *                  a pointer (TMedia *) to free()
  *********************************************************/
 void deleteMedia()
 {

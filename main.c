@@ -21,14 +21,12 @@
 #include "sort.h"
 #include "list.h"
 
-//TMedia Medias[MAXMEDIA];
-TMedia *Medias;
 TMedia *First, *Last;
 
 int main()
 {
     
-    Medias = (TMedia*)(calloc(1, sizeof(TMedia))); //TO DO: Auf NULL initialisieren (ne, macht calloc...)
+    //Medias = (TMedia*)(calloc(1, sizeof(TMedia))); //TO DO: Auf NULL initialisieren (ne, macht calloc...)
     First = Last = NULL;
 
     char *menutitle = "Medien-Verwaltung Deluxe";      //wir brauchen einen besseren namen..

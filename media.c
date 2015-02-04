@@ -4,8 +4,6 @@
 #include "media.h"
 
 int MediaCounter = 0;
-//TMedia Medias[MAXMEDIA];
-//TMedia *Medias = &Media[0];
 //TODO: put in freeList
 
 
@@ -113,10 +111,10 @@ void sortTracks()
 
         switch(choice) //Ausgabe des Menüpunktes
         {
-                case 1: kuhsort(Medias, 0); exit = 0; break; //Tracknr
-                case 2: kuhsort(Medias, 1); exit = 0; break; //Titel
-                case 3: kuhsort(Medias, 2); exit = 0; break; //Interpret
-                case 4: kuhsort(Medias, 3); exit = 0; break; //Trackdauer
+                case 1: kuhsort(0); exit = 0; break; //Tracknr
+                case 2: kuhsort(1); exit = 0; break; //Titel
+                case 3: kuhsort(2); exit = 0; break; //Interpret
+                case 4: kuhsort(3); exit = 0; break; //Trackdauer
                 case 5: exit = 0;		break;
         }
     }while(exit);

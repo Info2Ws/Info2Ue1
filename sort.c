@@ -36,9 +36,8 @@
  **********************************************************/ 
  int (*cmp[4])(TTrack *, TTrack *);     //function pointer array
 
- void kuhsort(TMedia *medium, int type)
+ void kuhsort(int type)
  {
-     int idx_medium;      //index of actual medium
      TMedia *actual_medium = First; //will point on actual medium
      //fill array with compare functions
      cmp[0] = cmpTracknr;
@@ -97,7 +96,6 @@
  int partition(TTrack *data, int (*cmp)(TTrack *, TTrack *), int ui, int oi)
  {
      int i = ui, j = oi;
-     int icmpresult, jcmpresult;
      TTrack temp = {0};
      //border is first element at beginning
      TTrack *border = data + ui;

@@ -6,7 +6,7 @@
 #include "datastructure.h"
 
 /* Funktions Prototypen */
-void kuhsort(TMedia *medium, int type);
+void kuhsort(int type);
 void ksort(TTrack *data, int (*)(TTrack *, TTrack *), int ui, int oi);
 int partition(TTrack *data, int (*)(TTrack *, TTrack *), int ui, int oi);
 int cmpTracknr(TTrack *t1, TTrack *t2);
