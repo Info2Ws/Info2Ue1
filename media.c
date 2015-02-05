@@ -4,6 +4,7 @@
 #include "media.h"
 
 int MediaCounter = 0;
+THashElement MediaIndex[MAXINDEX];
 //TODO: put in freeList
 
 
@@ -44,6 +45,7 @@ void createMedia()
         T = (M->Tracks) + i; 
         createTrack(T, M->interpret);
         T->Tracknr = i + 1; 
+        insertInHashTable(M, i+1);  //neue Tracks in Hash Tabelle einfügen
         M->Totalnumber = i + 1;
 
         if(!askAgain())
@@ -54,7 +56,6 @@ void createMedia()
 
     //In Doppelt-Verkettete Liste einfügen
     insertInList(M);
-    //memset(Medias, 0, sizeof(TMedia)); 
 }
 /**********************************************************
  * FUNCTION:        editMedia 
@@ -83,15 +84,6 @@ int createTrack(TTrack *pT, char * wI)
         getTime("Geben Sie bitte die Dauer des Tracks ein\n(Format hh:mm:ss oder mm:ss): ", &(pT->lp));
 
 	return 0;
-}
-/**********************************************************
- * FUNCTION:        searchTrack 
- * --------------------------------------------------------
- * DESCRIPTION:
- *********************************************************/
-void searchTrack()
-{
-	printf("searchTrack");
 }
 /**********************************************************
  * FUNCTION:        sortTracks 
@@ -235,4 +227,45 @@ void listOneTrack(TMedia * M, int Tracknum)
         printf("( ");
         printTime(&((T+Tracknum)->lp));
         printf(" )\n");
+}
+
+/**********************************************************
+ * FUNCTION:    searchTrack     
+ * --------------------------------------------------------
+ * DESCRIPTION: will search for Tracks (hash) 
+ * STATUS:          
+ **********************************************************/ 
+void searchTrack()
+{
+    char input[60] = {0};         //für zu suchenden Track
+    int hashIndex;
+    TListElement *tmp;
+
+    clearScreen();
+    printf("\nNach welchem Track soll gesucht werden?\n:");
+    scanf("%59[^\n]", input);   //lese zu suchenden Track ein
+    hashIndex = calcDivisionRest(input);   //errechne hash
+    clearBuffer();    //ein Zeile hoch?
+    if((MediaIndex+hashIndex)->HFirst)          
+    {
+        tmp = (MediaIndex+hashIndex)->HFirst;
+        while(tmp)
+        {
+            if(strcmp(input, tmp->list_track->title) != 0)
+                tmp = tmp->Next;
+            else
+                break;
+        }
+        printf("\n\nErgebnis der Suche:\n");
+        printLine('-', 19);
+        if(tmp)
+        {
+            printf("\nIm Medium: %s\n   ", tmp->list_medium->title);
+            listOneTrack(tmp->list_medium, (tmp->list_track->Tracknr)-1);
+            printf("\n\n");
+        }
+        else
+            //wird noch nicht ausgegeben, wieso?
+            printf("Der gewuenschte Track konnte nicht gefunden werden!\n");
+    }
 }

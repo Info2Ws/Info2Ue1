@@ -10,6 +10,8 @@ int insertInList(TMedia *Neu);
 int cmpMediaTitleAsc(TMedia *t1, TMedia *t2);
 void deleteMedia();
 TMedia *removeFromList(int delIndex, int direction);
+int appendInIndexList(THashElement *hash, TListElement *Neu);
+int deleteFromIndexList(THashElement *hash, TTrack *trash);
 
 
 #endif

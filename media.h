@@ -6,15 +6,16 @@
 #include "datetime.h"
 #include "menu.h"
 #include "sort.h"
+#include "search.h"
 
 void createMedia();
 void editMedia();
 int createTrack(TTrack * pT, char * wI);
-void searchTrack();
 void sortTracks();
 void list();
 void listMedia(unsigned int direction);
 void listOneMedia(TMedia *M);
 void listOneTrack(TMedia * M, int Tracknum);
+void searchTrack();
 
 #endif

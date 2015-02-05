@@ -20,13 +20,13 @@
 #include "database.h"
 #include "sort.h"
 #include "list.h"
+#include "search.h"
 
 TMedia *First, *Last;
 
 int main()
 {
     
-    //Medias = (TMedia*)(calloc(1, sizeof(TMedia))); //TO DO: Auf NULL initialisieren (ne, macht calloc...)
     First = Last = NULL;
 
     char *menutitle = "Medien-Verwaltung Deluxe";      //wir brauchen einen besseren namen..

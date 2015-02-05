@@ -130,6 +130,7 @@
         if (matchTag = strstr(line, "<Track>"))
         {
             loadOneTrack(data, TrackNr, Medium);
+            insertInHashTable(Medium, TrackNr);  //neue Tracks in Hash Tabelle einfügen
             TrackNr++;
         }
 

@@ -212,3 +212,68 @@ TMedia *removeFromList(int delIndex, int direction)
     }
     return NULL;
 } 
+/**********************************************************
+ * FUNCTION:        appendInIndexList 
+ * --------------------------------------------------------
+ * DESCRIPTION:     appends new ListElement in a 
+ *                  HashElement of the MediaIndex array
+ * AGUMENTS:        Gets a pointer on an element from
+ *                  MediaIndex and a pointer on an list
+ *                  element
+ * STATUS:          
+ **********************************************************/ 
+int appendInIndexList(THashElement *hash, TListElement *Neu)
+{
+    if(!hash && !Neu)           //existieren die Elemente?
+        return 0;
+    Neu->Next == NULL;          //wenn, neues Listenende
+    if(hash->HFirst == NULL)    //Fall1: Liste leer
+        hash->HFirst = hash->HLast = Neu;
+    else                        //Fall2: Hinten anhängen
+        hash->HLast = hash->HLast->Next = Neu;
+    return 1;
+}
+/**********************************************************
+ * FUNCTION:        deleteFromIndexList 
+ * --------------------------------------------------------
+ * DESCRIPTION:     deletes element from MediaIndex 
+ *                  will search in MediaIndex for the
+ *                  ListElement of the Track to delete
+ * AGUMENTS:        Gets a pointer on an element from
+ *                  MediaIndex and a Track to delete
+ * STATUS:          
+ **********************************************************/ 
+int deleteFromIndexList(THashElement *hash, TTrack *trash)
+{
+    int cmp = NULL;
+    TListElement *tmp = NULL, *pretmp = NULL;
+    if(hash->HFirst == NULL)    //Fall1: Liste leer
+        return 0;
+    cmp = strcmp(hash->HFirst->list_track->title, trash->title);
+    if(cmp == 0)              //Fall2: Listenanfang enternen
+    {
+        tmp = hash->HFirst;
+        if(hash->HFirst == hash->HLast) //falls nur ein Element
+            hash->HLast = NULL;
+        hash->HFirst = hash->HFirst->Next;
+        free(tmp);
+        return 1;
+    }
+    pretmp = hash->HFirst;      //Fall3: Element suchen
+    tmp = pretmp->Next;
+    while(!tmp)
+    {
+        cmp = strcmp(tmp->list_track->title, trash->title);
+        if(cmp == 0)
+        {
+            pretmp->Next = tmp->Next;
+            if(tmp == hash->HLast)      //falls letztes Element entfernt wird
+                hash->HLast = pretmp;
+            free(tmp);
+            return 1;
+        }
+        pretmp = tmp;
+        tmp = tmp->Next;
+    }
+    return 0;
+}
