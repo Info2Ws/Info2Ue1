@@ -257,7 +257,7 @@ void searchTrack()
                 break;
         }
         printf("\n\nErgebnis der Suche:\n");
-        printLine('-', 19);
+        printLine('-', 19); printf("\n");
         if(tmp)
         {
             printf("\nIm Medium: %s\n   ", tmp->list_medium->title);
@@ -268,4 +268,33 @@ void searchTrack()
             //wird noch nicht ausgegeben, wieso?
             printf("Der gewuenschte Track konnte nicht gefunden werden!\n");
     }
+}
+/**********************************************************
+ * FUNCTION:    listIndex()     
+ * --------------------------------------------------------
+ * DESCRIPTION: will print the hash table
+ * STATUS:          
+ **********************************************************/ 
+void listIndex()
+{
+    int i;
+    TListElement *tmp;
+
+    for(i = 0; i < MAXINDEX; i++)       //durchlaufe das MediaIndex Feld
+    {
+        if(MediaIndex+i)                //wenn es ein Element gibt
+        {
+            tmp = (MediaIndex+i)->HFirst;   //dann zeige auf den Listenanfang
+            while(tmp)                      //durchlaufe einfach Liste
+            {
+                if(tmp == (MediaIndex+i)->HFirst) //wenn Element erstes in der Liste 
+                    printf("\nHashwert = %03i | Medium = %s | Track = %s", i, tmp->list_medium->title, tmp->list_track->title);
+                else
+                    printf("\n               | Medium = %s | Track = %s", tmp->list_medium->title, tmp->list_track->title);
+                tmp = tmp->Next;
+
+            }
+        }
+    }
+    printf("\n");
 }

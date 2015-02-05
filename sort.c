@@ -111,6 +111,7 @@
          //if the indices havent met
          if(i < j)
          {
+             switchListElement(data+i, data+j);
              temp = *(data + i);
              *(data + i) = *(data + j);
              *(data + j) = temp;
@@ -119,13 +120,41 @@
      }
      i--;
      //put the border between both parts
+     switchListElement(data+ui, data+i);
      temp = *(data + ui);
      *(data + ui) = *(data + i);
      *(data + i) = temp;
 
      return i;
  }
+/**********************************************************
+ * FUNCTION:        switchListElement
+ * --------------------------------------------------------
+ * DESCRIPTION:     switch list elements
+ *                  prevents broken search after sorting
+ **********************************************************/ 
+void switchListElement(TTrack *t1, TTrack *t2) 
+{
+    int t1hash, t2hash;
+    TListElement *tmp;
 
+    t1hash = calcDivisionRest(t1->title);
+    t2hash = calcDivisionRest(t2->title);
+    tmp = (MediaIndex+t1hash)->HFirst;
+    while(tmp)
+    {
+        if(strcmp(t1->title, tmp->list_track->title) == 0)
+            tmp->list_track = t2;
+        tmp = tmp->Next;
+    }
+    tmp = (MediaIndex+t2hash)->HFirst;
+    while(tmp)
+    {
+        if(strcmp(t2->title, tmp->list_track->title) == 0)
+            tmp->list_track = t1;
+        tmp = tmp->Next;
+    }
+}
 /**********************************************************
  * FUNCTION:        cmpTracknr 
  * --------------------------------------------------------

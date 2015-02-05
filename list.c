@@ -114,6 +114,8 @@ int cmpMediaTitleAsc(TMedia *t1, TMedia *t2)
  *********************************************************/
 void deleteMedia()
 {
+    int j, hashIndex;
+    TTrack *T;
     char *list_menutitle = "Ausgabe Medien";
     char *list_menu[3] = {"1. Vorwaerts ausgeben", "2. Rueckwaerts ausgeben", "3. Zurueck zum Hauptmenu"};
     int choice, direction, delchoice;
@@ -158,6 +160,17 @@ void deleteMedia()
     }
     //Lese von Nutzer Index des zu loeschenden Medium ein
     getNumber("\nGeben Sie bitte die Nummer des zu loeschenden Mediums an ", &delchoice, 1, MediaCounter);
+    //Hashwerte entfernen
+    tmp = (direction == 0) ? First : Last; //je nach Richtung vorn oder hinten
+    for(j = 0; j < delchoice-1; j++)
+        tmp = (direction == 0) ? tmp->Next :tmp->Prev;
+    for(j = 0; j < (tmp->Totalnumber); j++)
+    {
+        T = (tmp->Tracks)+j;
+        hashIndex = calcDivisionRest(T->title);      
+        deleteFromIndexList(MediaIndex+hashIndex, T);
+    }
+    //Medium entfernen
     trash = removeFromList(delchoice - 1, direction); 
     free(trash);
     MediaCounter--;

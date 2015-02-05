@@ -32,11 +32,11 @@ int main()
     char *menutitle = "Medien-Verwaltung Deluxe";      //wir brauchen einen besseren namen..
     char *menu[9] = {"1. Neues Medium anlegen", "2. Medium bearbeiten", 
 	"3. Medium loeschen", "4. nach Tracks suchen", "5. Tracks sortieren", 
-	"6. Medien auflisten", "7. Medien speichern", "8. Medien laden", "9. Programm beenden"};
+	"6. Medien auflisten", "7. Medien speichern", "8. HashIndex auflisten", "9. Programm beenden"};
     int choice = 0;            //Auswahlvariable
     int exit = 1;   //Abbruchvariable für fußgesteuerte Schleife
 
-	//loadMedia(); //Laden der Datenbank von Datei
+	loadMedia(); //Laden der Datenbank von Datei
 	
     do
     {
@@ -49,9 +49,9 @@ int main()
                 case 3: deleteMedia();	break;
                 case 4: searchTrack();	break;
                 case 5: sortTracks();	break;
-                case 6: list();	        break;
+                case 6: list();         break;
                 case 7: saveMedia();	break;
-                case 8: loadMedia();    break;  //Für Tests, falls es da bleibt muss das db immer davor gelöscht werden
+                case 8: listIndex();    break; 
                 case 9: exit = 0;    	break;
         }
         waitForEnter();
