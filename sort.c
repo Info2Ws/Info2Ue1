@@ -135,25 +135,16 @@
  **********************************************************/ 
 void switchListElement(TTrack *t1, TTrack *t2) 
 {
-    int t1hash, t2hash;
-    TListElement *tmp;
+    TListElement Suche;
+    TListElement *tl1, *tl2;
 
-    t1hash = calcDivisionRest(t1->title);
-    t2hash = calcDivisionRest(t2->title);
-    tmp = (MediaIndex+t1hash)->HFirst;
-    while(tmp)
-    {
-        if(strcmp(t1->title, tmp->list_track->title) == 0)
-            tmp->list_track = t2;
-        tmp = tmp->Next;
-    }
-    tmp = (MediaIndex+t2hash)->HFirst;
-    while(tmp)
-    {
-        if(strcmp(t2->title, tmp->list_track->title) == 0)
-            tmp->list_track = t1;
-        tmp = tmp->Next;
-    }
+    Suche.list_track = t1;
+    tl1 = search(MediaIndex, cmpTitle, &Suche);
+    Suche.list_track = t2;
+    tl2 = search(MediaIndex, cmpTitle, &Suche);
+
+    tl1->list_track = t2;
+    tl2->list_track = t1;
 }
 /**********************************************************
  * FUNCTION:        cmpTracknr 

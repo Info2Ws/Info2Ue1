@@ -46,3 +46,21 @@ void insertInHashTable(TMedia *newM, int Tracknr)
     hashIndex = calcDivisionRest(newLE->list_track->title);
     appendInIndexList(MediaIndex+hashIndex, newLE);
 }
+
+TListElement *search(THashElement *HE, int (*cmp)(TTrack *, TTrack *), TListElement *tmp2)
+{
+    int Hashwert;
+    TListElement *Erg = NULL;
+    TTrack *T = tmp2->list_track;
+
+    Hashwert = calcDivisionRest(T->title);
+    Erg = (HE + Hashwert)->HFirst;
+    while (Erg)
+    {
+        if (cmp(Erg->list_track, tmp2->list_track) == 0)
+            return Erg;
+        Erg = Erg->Next;
+    }
+    return NULL;
+}
+

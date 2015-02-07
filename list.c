@@ -260,10 +260,10 @@ int deleteFromIndexList(THashElement *hash, TTrack *trash)
 {
     int cmp = NULL;
     TListElement *tmp = NULL, *pretmp = NULL;
-    if(hash->HFirst == NULL)    //Fall1: Liste leer
+    if(hash->HFirst == NULL)            //Fall1: Liste leer
         return 0;
     cmp = strcmp(hash->HFirst->list_track->title, trash->title);
-    if(cmp == 0)              //Fall2: Listenanfang enternen
+    if(cmp == 0)                        //Fall2: Listenanfang enternen
     {
         tmp = hash->HFirst;
         if(hash->HFirst == hash->HLast) //falls nur ein Element
@@ -272,7 +272,7 @@ int deleteFromIndexList(THashElement *hash, TTrack *trash)
         free(tmp);
         return 1;
     }
-    pretmp = hash->HFirst;      //Fall3: Element suchen
+    pretmp = hash->HFirst;              //Fall3: Element suchen
     tmp = pretmp->Next;
     while(!tmp)
     {

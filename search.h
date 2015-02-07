@@ -7,5 +7,6 @@
 
 int calcDivisionRest(char *name);
 void insertInHashTable(TMedia *newM, int Tracknr);
+TListElement *search(THashElement *HE, int (*cmp)(TTrack *, TTrack *), TListElement *Such);
 
 #endif

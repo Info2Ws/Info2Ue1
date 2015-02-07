@@ -45,7 +45,7 @@ void createMedia()
         T = (M->Tracks) + i; 
         createTrack(T, M->interpret);
         T->Tracknr = i + 1; 
-        insertInHashTable(M, i+1);  //neue Tracks in Hash Tabelle einfügen
+        insertInHashTable(M, i);  //neue Tracks in Hash Tabelle einfügen
         M->Totalnumber = i + 1;
 
         if(!askAgain())
@@ -237,25 +237,19 @@ void listOneTrack(TMedia * M, int Tracknum)
  **********************************************************/ 
 void searchTrack()
 {
-    char input[60] = {0};         //für zu suchenden Track
+    char input[30] = {0};         //für zu suchenden Track
     int hashIndex;
     TListElement *tmp;
+    TListElement tmp2;
+
+    tmp2.list_track = calloc(1, sizeof(TTrack));
 
     clearScreen();
-    printf("\nNach welchem Track soll gesucht werden?\n:");
-    scanf("%59[^\n]", input);   //lese zu suchenden Track ein
-    hashIndex = calcDivisionRest(input);   //errechne hash
+    getText("eingabe ... ", 50, 0, &(tmp2.list_track->title));
+    tmp = search(MediaIndex, cmpTitle, &tmp2);
+
     clearBuffer();    //ein Zeile hoch?
-    if((MediaIndex+hashIndex)->HFirst)          
-    {
-        tmp = (MediaIndex+hashIndex)->HFirst;
-        while(tmp)
-        {
-            if(strcmp(input, tmp->list_track->title) != 0)
-                tmp = tmp->Next;
-            else
-                break;
-        }
+    
         printf("\n\nErgebnis der Suche:\n");
         printLine('-', 19); printf("\n");
         if(tmp)
@@ -267,7 +261,6 @@ void searchTrack()
         else
             //wird noch nicht ausgegeben, wieso?
             printf("Der gewuenschte Track konnte nicht gefunden werden!\n");
-    }
 }
 /**********************************************************
  * FUNCTION:    listIndex()     
